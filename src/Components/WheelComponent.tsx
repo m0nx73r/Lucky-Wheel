@@ -243,7 +243,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         ctx.arc(centerX, centerY, 40, 0, PI2, false);
         ctx.closePath();
         ctx.fillStyle = primaryColor || "black";
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 4;
         ctx.strokeStyle = "white";
         ctx.fill();
         ctx.font = "bold 2em " + "sans-serif";

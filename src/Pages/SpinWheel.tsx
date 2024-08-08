@@ -1,6 +1,8 @@
 import { memo, useState } from "react";
 import LuckyWheel from "../Components/LuckyWheel";
-import { SpeakerOff, SpeakerOn } from "../Components/Icons";
+import { PaytmIcon, SpeakerOff, SpeakerOn } from "../Components/Icons";
+import spin from "../../src/assets/spin.png";
+import flower from "../assets/Flowers.png";
 
 const SpinWheel = memo(() => {
   // local state for handling speaker
@@ -21,25 +23,32 @@ const SpinWheel = memo(() => {
   };
 
   return (
-    <div className="relative bg-[#4c0e30] min-h-screen flex flex-col items-center">
+    <div className="relative overflow-hidden bg-[#4c0e30] min-h-screen flex flex-col items-center px-4 md:px-8">
       <div
-        className="absolute p-4 top-4 right-4 cursor-pointer"
+        className="absolute p-2 top-4 right-4 md:top-6 md:right-6 cursor-pointer"
         onClick={toggleSpeaker}
       >
         {speakerOff ? <SpeakerOff /> : <SpeakerOn />}
       </div>
 
-      <span className="text-4xl font-semibold text-white p-4">Lucky Wheel</span>
-
-      <div className="text-2xl font-semibold text-white mb-4">
-        Spins Left: {spins}
+      <div className="relative">
+        <img src={flower} alt="" className="h-72" />
+       <div className="bg-white w-36 flex justify-center items-center h-14 rounded-lg absolute top-12 border-4 border-[#ffde41] right-[35%]"> <PaytmIcon /></div>
       </div>
+      <span className="text-2xl absolute top-40 md:text-4xl font-semibold text-white p-4 mt-4 md:mt-8">
+        Lucky Wheel
+      </span>
 
       <LuckyWheel
-        onSpin={handleSpin} // onspin functioon
-        remainingSpins={spins} // hanbdling reaming spin as spin will be disabled after 3
+        onSpin={handleSpin} // onspin function
+        remainingSpins={spins} // handling remaining spins as spin will be disabled after 3
         speakerOff={speakerOff} // Pass the speakerOff state
       />
+
+      <div className="text-base md:text-xl bg-[#002a74] p-3 md:p-4 rounded-lg w-full max-w-md flex flex-col items-center gap-4 font-semibold text-white mt-6 mb-4">
+        {spins} Lucky Spin Available
+        <img src={spin} alt="" className="h-12 md:h-14" />
+      </div>
     </div>
   );
 });
