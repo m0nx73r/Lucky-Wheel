@@ -51,8 +51,8 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     const downTime = segments.length * downDuration;
     let spinStart = 0;
     let frames = 0;
-    const centerX = 300;
-    const centerY = 300;
+    const centerX = 200;
+    const centerY = 200;
     // audio
     const spinSound = useRef<HTMLAudioElement>(
       new Audio("../../public/spin.mp3")
@@ -320,8 +320,8 @@ const WheelComponent: FC<WheelComponentProps> = memo(
       <div id="wheel">
         <canvas
           id="canvas"
-          width="600"
-          height="600"
+          width="400px"
+          height="400px"
           style={{
             pointerEvents: isFinished && isOnlyOnce ? "none" : "auto",
           }}

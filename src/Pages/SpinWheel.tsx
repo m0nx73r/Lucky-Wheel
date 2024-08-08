@@ -38,7 +38,7 @@ const SpinWheel = memo(() => {
           <PaytmIcon />
         </div>
       </div>
-      <span className="text-2xl absolute top-40 md:text-4xl font-semibold text-white p-4 mt-4 md:mt-8">
+      <span className="text-2xl absolute top-28 md:text-4xl font-semibold text-white p-4 mt-4 md:mt-8">
         Lucky Wheel
       </span>
 
