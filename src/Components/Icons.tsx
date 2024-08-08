@@ -27,8 +27,8 @@ export const PaytmIcon = memo(() => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 48 48"
-        width="90px"
-        height="90px"
+        className="w-[60px] h-[60px] md:w-[90px] md:h-[90px]"
+        
       >
         <path
           fill="#0d47a1"

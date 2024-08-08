@@ -32,18 +32,21 @@ const SpinWheel = memo(() => {
       </div>
 
       <div className="relative">
-        <img src={flower} alt="" className="h-72" />
-       <div className="bg-white w-36 flex justify-center items-center h-14 rounded-lg absolute top-12 border-4 border-[#ffde41] right-[35%]"> <PaytmIcon /></div>
+        <img src={flower} alt="" className="md:h-72 " />
+        <div className="bg-white w-28 md:w-36 flex justify-center items-center md:h-14 h-10 rounded-lg absolute md:top-8 top-5 border-4 border-[#ffde41] right-[35%]">
+          {" "}
+          <PaytmIcon />
+        </div>
       </div>
       <span className="text-2xl absolute top-40 md:text-4xl font-semibold text-white p-4 mt-4 md:mt-8">
         Lucky Wheel
       </span>
 
-      <LuckyWheel
-        onSpin={handleSpin} // onspin function
-        remainingSpins={spins} // handling remaining spins as spin will be disabled after 3
-        speakerOff={speakerOff} // Pass the speakerOff state
-      />
+        <LuckyWheel
+          onSpin={handleSpin} // onspin function
+          remainingSpins={spins} // handling remaining spins as spin will be disabled after 3
+          speakerOff={speakerOff} // Pass the speakerOff state
+        />
 
       <div className="text-base md:text-xl bg-[#002a74] p-3 md:p-4 rounded-lg w-full max-w-md flex flex-col items-center gap-4 font-semibold text-white mt-6 mb-4">
         {spins} Lucky Spin Available
