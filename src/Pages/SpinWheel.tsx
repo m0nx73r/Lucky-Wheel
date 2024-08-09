@@ -38,9 +38,9 @@ const SpinWheel = memo(() => {
         {speakerOff ? <SpeakerOff /> : <SpeakerOn />}
       </div>
 
-      <div className="relative">
-        <img src={flower} alt="" className="md:h-72 w-full" />
-        <div className="bg-white w-28 md:w-36 flex justify-center items-center md:h-14 h-10 rounded-lg absolute md:top-8 top-5 border-4 border-[#ffde41] right-[35%]">
+      <div className="relative w-full flex flex-col items-center">
+        <img src={flower} alt="" className="md:h-72 " />
+        <div className="bg-white w-28 md:w-36 flex justify-center items-center md:h-14 h-10 rounded-lg absolute md:top-8 top-20 border-4 border-[#ffde41]">
           <PaytmIcon />
         </div>
       </div>
