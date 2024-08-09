@@ -209,7 +209,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
         // Draw the text
         ctx.fillStyle = contrastColor || "white";
-        ctx.font = "bold 14px sans-serif";
+        ctx.font = "bold 12px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(value, 0, 0);

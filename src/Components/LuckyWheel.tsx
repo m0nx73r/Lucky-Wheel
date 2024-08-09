@@ -74,7 +74,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
           contrastColor="black" // segment color
           buttonText="TAP" // btn twext
           isOnlyOnce={remainingSpins <= 0} // Disable spin if no spins left
-          size={190} // size fo the wheel
+          size={160} // size fo the wheel
           upDuration={50} // duration
           downDuration={700} // duration for spin
         />
@@ -97,6 +97,9 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
                 onClick={handleCloseModal}
               >
                 <CrossIcon />
+              </button>
+              <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white  md:text-2xl font-bold text-[#1a1649]">
+                Claim
               </button>
             </div>
           </div>
