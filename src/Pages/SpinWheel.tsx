@@ -30,7 +30,7 @@ const SpinWheel = memo(() => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[#4c0e30] min-h-screen flex flex-col items-center px-4 md:px-8">
+    <div className="relative overflow-hidden bg-[#4c0e30] min-h-screen flex flex-col items-center  md:px-8">
       <div
         className="absolute p-2 top-4 z-50 right-4 md:top-6 md:right-6 cursor-pointer"
         onClick={toggleSpeaker}
@@ -39,12 +39,12 @@ const SpinWheel = memo(() => {
       </div>
 
       <div className="relative w-full flex flex-col items-center">
-        <img src={flower} alt="" className="md:h-72 " />
-        <div className="bg-white w-28 md:w-36 flex justify-center items-center md:h-14 h-10 rounded-lg absolute md:top-8 top-20 border-4 border-[#ffde41]">
+        <img src={flower} alt="" className="h-[10rem] w-[30rem] md:h-[10rem]" />
+        <div className="bg-white w-28 md:w-36 flex justify-center items-center md:h-14 h-10 rounded-lg absolute md:top-8 top-8 border-4 border-[#ffde41]">
           <PaytmIcon />
         </div>
       </div>
-      <span className="text-2xl absolute top-28 md:text-4xl font-semibold text-white p-4 mt-4 md:mt-8">
+      <span className="text-2xl absolute top-28 md:text-4xl font-semibold text-white ">
         Lucky Wheel
       </span>
 
@@ -54,7 +54,7 @@ const SpinWheel = memo(() => {
         speakerOff={speakerOff}
       />
 
-      <div className="text-base md:text-xl bg-[#002a74] p-3 md:p-4 rounded-lg w-full max-w-md flex flex-col items-center gap-4 font-semibold z-50 text-white mt-6 mb-4">
+      <div className="text-base md:text-xl bg-[#002a74] p-3 md:p-4 rounded-lg w-80 md:w-96  flex flex-col items-center gap-4 font-semibold z-50 text-white mb-2">
         {spins > 0 ? `${spins} Lucky Spins Available` : "No Spins Available"}
         <span className="flex flex-row items-center">{renderImages()}</span>
       </div>
