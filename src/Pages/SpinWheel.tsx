@@ -3,6 +3,7 @@ import LuckyWheel from "../Components/LuckyWheel";
 import { PaytmIcon, SpeakerOff, SpeakerOn } from "../Components/Icons";
 import spin from "../../src/assets/spin.png";
 import flower from "../assets/Flowers.png";
+import luckyWheelFont from "../assets/Lucky-Wheel-Font.png";
 
 const SpinWheel = memo(() => {
   const [speakerOff, setSpeakerOff] = useState<boolean>(false);
@@ -44,9 +45,7 @@ const SpinWheel = memo(() => {
           <PaytmIcon />
         </div>
       </div>
-      <span className="text-2xl absolute top-28 md:text-4xl font-semibold text-white ">
-        Lucky Wheel
-      </span>
+      <img src={luckyWheelFont} alt="luckWheelFont" className="w-72"/>
 
       <LuckyWheel
         onSpin={handleSpin}
