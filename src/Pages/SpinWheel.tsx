@@ -4,6 +4,9 @@ import { PaytmIcon, SpeakerOff, SpeakerOn } from "../Components/Icons";
 import spin from "../../src/assets/spin.png";
 import flower from "../assets/Flowers.png";
 import luckyWheelFont from "../assets/Lucky-Wheel-Font.png";
+import gift1 from "../assets/gift1.png";
+import gift2 from "../assets/gift2.png";
+import gift3 from "../assets/gift3.png";
 
 const SpinWheel = memo(() => {
   const [speakerOff, setSpeakerOff] = useState<boolean>(false);
@@ -45,7 +48,11 @@ const SpinWheel = memo(() => {
           <PaytmIcon />
         </div>
       </div>
-      <img src={luckyWheelFont} alt="luckWheelFont" className="w-72"/>
+      <img
+        src={luckyWheelFont}
+        alt="luckWheelFont"
+        className="w-72 absolute top-28 my-2"
+      />
 
       <LuckyWheel
         onSpin={handleSpin}
@@ -53,9 +60,14 @@ const SpinWheel = memo(() => {
         speakerOff={speakerOff}
       />
 
-      <div className="text-base md:text-xl bg-[#002a74] p-3 md:p-4 rounded-lg w-80 md:w-96  flex flex-col items-center gap-4 font-semibold z-50 text-white mb-2">
+      <div className="text-base md:text-xl bg-[#002a74] p-3 md:p-4 rounded-lg w-80 md:w-96  flex flex-col items-center gap-4 font-semibold z-50 text-white mb-2 relative">
         {spins > 0 ? `${spins} Lucky Spins Available` : "No Spins Available"}
         <span className="flex flex-row items-center">{renderImages()}</span>
+      </div>
+      <div className="absolute flex flex-row gap-10 md:gap-40 bottom-0 z-40 opacity-60">
+        <img src={gift1} alt="" className="md:h-40 h-20" />
+        <img src={gift2} alt="" className="md:h-40 h-20" />
+        <img src={gift3} alt="" className="md:h-40 h-20" />
       </div>
       <div className="text-base md:text-xl z-50 p-3 md:p-4 rounded-lg max-w-md flex flex-col items-center gap-4 font-semibold bg-[#ffde41] text-[#002a74] mt-6 mb-4">
         FREE SPINS EVERYDAY
