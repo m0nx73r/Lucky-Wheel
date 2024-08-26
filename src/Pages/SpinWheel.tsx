@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import LuckyWheel from "../Components/LuckyWheel";
 import { SpeakerOff, SpeakerOn } from "../Components/Icons";
-import spin from "../../src/assets/spin.png";
+import spin from "../../src/assets/spins.png";
 import bg from "../assets/spin-bg.jpg";
 
 const SpinWheel = memo(() => {
@@ -24,7 +24,7 @@ const SpinWheel = memo(() => {
         key={index}
         src={spin}
         alt={`Spin ${index + 1}`}
-        className="h-12 md:h-14"
+        className="h-8 "
       />
     ));
   };
@@ -46,7 +46,7 @@ const SpinWheel = memo(() => {
         {speakerOff ? <SpeakerOff /> : <SpeakerOn />}
       </div>
 
-      <div className="mt-16">
+      <div>
         <LuckyWheel
           onSpin={handleSpin}
           remainingSpins={spins}
@@ -54,14 +54,11 @@ const SpinWheel = memo(() => {
         />
       </div>
 
-      <div className="text-sm mt-4  bg-[#002a74] p-3 md:p-4 rounded-lg w-60  flex flex-col items-center gap-4 font-semibold z-50 text-white mb-2 relative">
+      <div className="text-sm mt-4  bg-[#1b5b67] p-2  rounded-lg w-52  flex flex-col items-center gap-4 font-semibold z-50 text-white mb-2 relative">
         {spins > 0 ? `${spins} Lucky Spins Available` : "No Spins Available"}
         <span className="flex flex-row items-center">{renderImages()}</span>
       </div>
 
-      <div className="text-sm mt-3 z-20 p-3 md:p-4 rounded-lg max-w-md flex flex-col items-center gap-4 font-semibold bg-[#ffde41] text-[#002a74]  mb-4">
-        FREE SPINS EVERYDAY
-      </div>
     </div>
   );
 });

@@ -319,7 +319,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         <canvas
           id="canvas"
           width="380px"
-          height="340px"
+          height="380px"
           style={{
             pointerEvents: isFinished && isOnlyOnce ? "none" : "auto",
           }}
