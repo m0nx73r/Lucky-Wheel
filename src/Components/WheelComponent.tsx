@@ -209,7 +209,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
         // Draw the text
         ctx.fillStyle = contrastColor || "white";
-        ctx.font = "bold 12px sans-serif";
+        ctx.font = "bold 10px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(value, 0, 0);
@@ -240,13 +240,13 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
         // Draw a center circle
         ctx.beginPath();
-        ctx.arc(centerX, centerY, 40, 0, PI2, false);
+        ctx.arc(centerX, centerY, 35, 0, PI2, false);
         ctx.closePath();
         ctx.fillStyle = primaryColor || "black";
         ctx.lineWidth = 4;
         ctx.strokeStyle = "white";
         ctx.fill();
-        ctx.font = "bold 2em " + "sans-serif";
+        ctx.font = "bold 1em " + "sans-serif";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.fillText(buttonText || "Spin", centerX, centerY + 3);
@@ -260,7 +260,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         ctx.stroke();
 
         // Draw small round circles around the outer circle
-        const numCircles = 100; // Number of small circles
+        const numCircles = 80; // Number of small circles
         const smallCircleRadius = 3; // Radius of the small circles
         const angleStep = PI2 / numCircles;
 
@@ -289,7 +289,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         ctx.beginPath();
         ctx.moveTo(centerX + 10, centerY - 40);
         ctx.lineTo(centerX - 10, centerY - 40);
-        ctx.lineTo(centerX, centerY - 60);
+        ctx.lineTo(centerX, centerY - 55);
         ctx.closePath();
         ctx.fill();
         const change = angleCurrent + Math.PI / 2;
@@ -303,9 +303,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         ctx.fillStyle = "transparent";
         ctx.font = "bold 1.5em ";
         currentSegment = segments[i];
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        isStarted &&
-          ctx.fillText(currentSegment, centerX + 10, centerY + size + 50);
+
       }
     };
 
@@ -320,8 +318,8 @@ const WheelComponent: FC<WheelComponentProps> = memo(
       <div id="wheel">
         <canvas
           id="canvas"
-          width="400px"
-          height="400px"
+          width="380px"
+          height="340px"
           style={{
             pointerEvents: isFinished && isOnlyOnce ? "none" : "auto",
           }}

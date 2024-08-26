@@ -74,7 +74,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
           contrastColor="black" // segment color
           buttonText="TAP" // btn twext
           isOnlyOnce={remainingSpins <= 0} // Disable spin if no spins left
-          size={160} // size fo the wheel
+          size={130} // size fo the wheel
           upDuration={50} // duration
           downDuration={700} // duration for spin
         />
