@@ -54,7 +54,7 @@ const SpinWheel = memo(() => {
         />
       </div>
 
-      <div className="text-sm mt-4  bg-[#1b5b67] p-2  rounded-lg w-52  flex flex-col items-center gap-4 font-semibold z-50 text-white mb-2 relative">
+      <div className="text-sm mt-4  bg-[#1b5b67] p-2  rounded-lg w-52  flex flex-col items-center gap-4 font-semibold z-0 text-white mb-2 relative">
         {spins > 0 ? `${spins} Lucky Spins Available` : "No Spins Available"}
         <span className="flex flex-row items-center">{renderImages()}</span>
       </div>
