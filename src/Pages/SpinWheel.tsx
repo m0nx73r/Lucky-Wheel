@@ -20,12 +20,7 @@ const SpinWheel = memo(() => {
 
   const renderImages = () => {
     return Array.from({ length: spins }, (_, index) => (
-      <img
-        key={index}
-        src={spin}
-        alt={`Spin ${index + 1}`}
-        className="h-8 "
-      />
+      <img key={index} src={spin} alt={`Spin ${index + 1}`} className="h-8 " />
     ));
   };
 
@@ -40,7 +35,7 @@ const SpinWheel = memo(() => {
       }}
     >
       <div
-        className="absolute p-2 top-4 z-50 right-[38rem] cursor-pointer"
+        className="absolute p-2 top-4 z-50 right-[48px] md:right-[38rem] cursor-pointer"
         onClick={toggleSpeaker}
       >
         {speakerOff ? <SpeakerOff /> : <SpeakerOn />}
@@ -58,7 +53,6 @@ const SpinWheel = memo(() => {
         {spins > 0 ? `${spins} Lucky Spins Available` : "No Spins Available"}
         <span className="flex flex-row items-center">{renderImages()}</span>
       </div>
-
     </div>
   );
 });
