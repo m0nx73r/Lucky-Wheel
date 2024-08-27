@@ -80,29 +80,30 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
         />
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-4">
-            <div className="bg-[#1a1649] relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg">
-              <p className="text-lg text-white font-semibold">YOU WON</p>
-              {/* handle the amount  */}
-              <p className="text-xl md:text-2xl font-bold text-[#fdbf15]">
-                {prize.split(" ")[0]}
-              </p>
-              {/* handle the text after amount */}
-              <p className="text-lg md:text-xl text-white font-semibold">
-                {prize.split(" ").slice(1).join(" ")}
-              </p>
-              {/* gif for modal */}
-              <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
-              <button
-                className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
-                onClick={handleCloseModal}
-              >
-                <CrossIcon />
-              </button>
-              <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white  md:text-2xl font-bold text-[#1a1649]">
-                Claim
-              </button>
-            </div>
+          <div className="relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg backdrop-blur-sm bg-white bg-opacity-20 border border-white/30">
+            <p className="text-lg text-white font-semibold">YOU WON</p>
+            {/* handle the amount  */}
+            <p className="text-xl md:text-2xl font-bold text-[#fdbf15]">
+              {prize.split(" ")[0]}
+            </p>
+            {/* handle the text after amount */}
+            <p className="text-lg md:text-xl text-white font-semibold">
+              {prize.split(" ").slice(1).join(" ")}
+            </p>
+            {/* gif for modal */}
+            <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
+            <button
+              className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
+              onClick={handleCloseModal}
+            >
+              <CrossIcon />
+            </button>
+            <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white md:text-2xl font-bold text-[#1a1649]">
+              Claim
+            </button>
           </div>
+        </div>
+        
         )}
         {/* Audio elements */}
         <audio ref={spinSound} src="../../public/spin.mp3" preload="auto" />
