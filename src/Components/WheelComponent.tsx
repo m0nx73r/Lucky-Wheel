@@ -46,7 +46,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     let angleCurrent = 0;
     let angleDelta = 0;
     let canvasContext: CanvasRenderingContext2D | null = null;
-    let maxSpeed = Math.PI / segments.length;
+    let maxSpeed = Math.PI / segments.length * 4;
     const upTime = segments.length * upDuration;
     const downTime = segments.length * downDuration;
     let spinStart = 0;
@@ -94,7 +94,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
           // start spin according to the time
           spinStart = new Date().getTime();
           // speed of the spin pi / 6
-          maxSpeed = Math.PI / segments.length;
+          maxSpeed = Math.PI / segments.length ;
           frames = 0;
           // Start the spin timer
           timerHandle = window.setInterval(onTimerTick, timerDelay);
@@ -261,15 +261,15 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
         // Draw small round circles around the outer circle
         const numCircles = 80; // Number of small circles
-        const smallCircleRadius = 3; // Radius of the small circles
+        const smallCircleRadius = 2; // Radius of the small circles
         const angleStep = PI2 / numCircles;
 
         for (let i = 0; i < numCircles; i++) {
           const angle = i * angleStep;
           const x =
-            centerX + (outerRadius - smallCircleRadius) * Math.cos(angle);
+            centerX + (outerRadius - smallCircleRadius * 1.5) * Math.cos(angle);
           const y =
-            centerY + (outerRadius - smallCircleRadius) * Math.sin(angle);
+            centerY + (outerRadius - smallCircleRadius * 1.5) * Math.sin(angle);
 
           ctx.beginPath();
           ctx.arc(x, y, smallCircleRadius, 0, PI2, false);

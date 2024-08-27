@@ -41,7 +41,7 @@ const SpinWheel = memo(() => {
         {speakerOff ? <SpeakerOff /> : <SpeakerOn />}
       </div>
 
-      <div>
+      <div className="mt-12 mr-4">
         <LuckyWheel
           onSpin={handleSpin}
           remainingSpins={spins}
