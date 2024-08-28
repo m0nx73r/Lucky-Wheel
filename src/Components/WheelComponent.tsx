@@ -91,7 +91,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     useEffect(() => {
       // Load the icon image
       iconRef.current = new Image();
-      iconRef.current.src = "../../public/gold.svg"; // Update with your actual path
+      iconRef.current.src = "/gold.svg"; // Update with your actual path
 
       // Initialize the wheel once the image is loaded
       iconRef.current.onload = () => {
