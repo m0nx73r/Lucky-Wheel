@@ -11,12 +11,9 @@ function App() {
       <Routes>
         <Route path="/" element={<SpinWheel />} />
         <Route path="/address" element={<Address />} />
-        <Route path="/about" element={<Cart />} />
         <Route path="/locker" element={<GoldLocker />} />
         <Route path="/product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-
-
       </Routes>
     </Router>
   );

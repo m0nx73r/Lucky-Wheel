@@ -27,7 +27,7 @@ export default function Product() {
                                 <path d="M19 12H5" />
                             </svg>
                         </div>
-                        <h1 className="ml-2 text-lg font-semibold">Gold Locker</h1>
+                        <h1 className="ml-2 text-lg font-semibold">Buy Gold</h1>
                     </div>
                     <div className="ml-2">
                         <FontAwesomeIcon className='mx-2' icon={faSearch} />
