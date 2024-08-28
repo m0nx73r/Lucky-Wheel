@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useRef, useState } from "react";
+import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
 
 // types
 interface WheelComponentProps {
@@ -46,7 +46,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     let angleCurrent = 0;
     let angleDelta = 0;
     let canvasContext: CanvasRenderingContext2D | null = null;
-    let maxSpeed = Math.PI / segments.length * 4;
+    let maxSpeed = Math.PI / segments.length;
     const upTime = segments.length * upDuration;
     const downTime = segments.length * downDuration;
     let spinStart = 0;
@@ -67,12 +67,11 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     });
 
     // function for initialising the canvas as well as the wheel
-    const wheelInit = () => {
+    const wheelInit = useCallback(() => {
       initCanvas();
       wheelDraw();
-    };
+    }, []);
 
-    // canvas initialising
     const initCanvas = () => {
       const canvas = document.getElementById("canvas") as HTMLCanvasElement;
       canvasContext = canvas.getContext("2d");
@@ -85,6 +84,25 @@ const WheelComponent: FC<WheelComponentProps> = memo(
       };
     };
 
+    // Image for the icon
+    const iconRef = useRef<HTMLImageElement | null>(null);
+
+    // hook to handle the mounting of the hook
+    useEffect(() => {
+      // Load the icon image
+      iconRef.current = new Image();
+      iconRef.current.src = "../../public/gold.svg"; // Update with your actual path
+
+      // Initialize the wheel once the image is loaded
+      iconRef.current.onload = () => {
+        wheelInit();
+      };
+
+      setTimeout(() => {
+        window.scrollTo(0, 1);
+      }, 0);
+    }, [wheelInit]);
+
     // handle spin
     const spin = () => {
       // if is not started
@@ -94,7 +112,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
           // start spin according to the time
           spinStart = new Date().getTime();
           // speed of the spin pi / 6
-          maxSpeed = Math.PI / segments.length ;
+          maxSpeed = Math.PI / segments.length;
           frames = 0;
           // Start the spin timer
           timerHandle = window.setInterval(onTimerTick, timerDelay);
@@ -150,32 +168,32 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         if (progress >= 1) finished = true; // Mark as finished if progress is complete
       }
 
-      angleCurrent += angleDelta;  // Update the current angle
+      angleCurrent += angleDelta; // Update the current angle
       while (angleCurrent >= Math.PI * 2) angleCurrent -= Math.PI * 2; // Normalize the angle
       if (finished) {
-        setFinished(true);  // Mark the spin as finished
-        onFinished(currentSegment);   // Call the onFinished callback with the winning segment
-        clearInterval(timerHandle);  // Clear the spin timer
+        setFinished(true); // Mark the spin as finished
+        onFinished(currentSegment); // Call the onFinished callback with the winning segment
+        clearInterval(timerHandle); // Clear the spin timer
         timerHandle = 0;
         angleDelta = 0;
       }
     };
 
-      // Draw the entire wheel and needle
+    // Draw the entire wheel and needle
     const wheelDraw = () => {
       clear(); // Clear the canvas
       drawWheel(); // Draw the wheel segments
       drawNeedle(); // Draw the needle
     };
 
-     // Redraw the wheel and needle on each frame
+    // Redraw the wheel and needle on each frame
     const draw = () => {
       clear(); // Clear the canvas
-      drawWheel();  // Draw the wheel segments
+      drawWheel(); // Draw the wheel segments
       drawNeedle(); // Draw the needle
     };
 
-     // Draw a single segment of the wheel
+    // Draw a single segment of the wheel
     const drawSegment = (key: number, lastAngle: number, angle: number) => {
       const ctx = canvasContext;
       const value = segments[key];
@@ -216,7 +234,16 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
         // Restore the canvas state
         ctx.restore();
-        // ctx.restore();
+
+        if (iconRef.current) {
+          const iconSize = size * 0.2; // Size of the icon (30% of the segment size)
+          const iconX =
+            centerX + (size / 2) * Math.cos(middleAngle) - iconSize / 2;
+          const iconY =
+            centerY + (size / 2) * Math.sin(middleAngle) - iconSize / 2;
+
+          ctx.drawImage(iconRef.current, iconX, iconY, iconSize, iconSize);
+        }
       }
     };
 
@@ -261,15 +288,15 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
         // Draw small round circles around the outer circle
         const numCircles = 80; // Number of small circles
-        const smallCircleRadius = 2; // Radius of the small circles
+        const smallCircleRadius = 3; // Radius of the small circles
         const angleStep = PI2 / numCircles;
 
         for (let i = 0; i < numCircles; i++) {
           const angle = i * angleStep;
           const x =
-            centerX + (outerRadius - smallCircleRadius * 1.5) * Math.cos(angle);
+            centerX + (outerRadius - smallCircleRadius) * Math.cos(angle);
           const y =
-            centerY + (outerRadius - smallCircleRadius * 1.5) * Math.sin(angle);
+            centerY + (outerRadius - smallCircleRadius) * Math.sin(angle);
 
           ctx.beginPath();
           ctx.arc(x, y, smallCircleRadius, 0, PI2, false);
@@ -303,7 +330,6 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         ctx.fillStyle = "transparent";
         ctx.font = "bold 1.5em ";
         currentSegment = segments[i];
-
       }
     };
 
