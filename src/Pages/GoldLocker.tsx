@@ -19,11 +19,11 @@ export default function GoldLocker() {
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text-sm">Balance</p>
-                        <p className="text-xl font-bold">$100.23</p>
+                        <p className="text-xl font-bold">₹{localStorage.getItem("prize")}.00</p>
                     </div>
                     <div className="text-right">
                         <p className="text-sm font-semibold">MMTC-PAMP🪙</p>
-                        <p className="text-lg font-bold text-green-600">+117.33% ($1.10)</p>
+                        <p className="text-lg font-bold text-green-600">+117.33% (₹1.10)</p>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@ export default function GoldLocker() {
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text-sm">Invested Amount</p>
-                        <p className="text-lg font-bold">$0.00</p>
+                        <p className="text-lg font-bold">₹0.00</p>
                     </div>
                     <div className="text-right">
                         <p className="text-sm font-semibold">Gold Balance</p>
@@ -46,9 +46,9 @@ export default function GoldLocker() {
         </div>
     </div>
     <footer className="bg-white p-2 shadow-md mt-auto mb-12">
-        <div className="flex items-center justify-between">
-            <button className="rounded-lg border-[#00bcfc] text-[#00bcfc] border-2 w-1/2 p-2 mx-2">Buy one time</button>
-            <button className="rounded-lg bg-[#00bcfc] text-white font-semibold w-1/2 p-2">Start SIP</button>
+        <div className="flex items-center justify-between">  
+            <button className="rounded-lg border-[#00bcfc] text-[#00bcfc] border-2 w-1/2 p-2 mx-2" onClick={_event =>  window.location.href='/product'}>Buy one time</button>
+            <button className="rounded-lg bg-[#00bcfc] text-white font-semibold w-1/2 p-2" onClick={_event =>  window.location.href='/product'}>Start SIP</button>
         </div>
     </footer>
 </div>

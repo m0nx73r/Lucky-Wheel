@@ -76,7 +76,7 @@ export default function Product() {
 
                 <div>
                     <p className='text-xl'>
-                        MRP <span className='font-bold'>$1,999</span>
+                        MRP <span className='font-bold'>₹{localStorage.getItem("prize")}.00</span>
                     </p>
                     <p className='text-gray-500 text-sm'>
                         Inclusive of all taxes
@@ -100,7 +100,7 @@ export default function Product() {
                 <div className="max-w-4xl text-center">
                     <p className="text-xl font-bold">
                         <a href="/address">
-                            Buy for $100
+                            Buy for <span className='line-through'>₹{localStorage.getItem("prize")}</span> ₹0
                         </a> </p>
                 </div>
             </footer>

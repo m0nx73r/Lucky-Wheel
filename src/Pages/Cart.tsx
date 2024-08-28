@@ -1,4 +1,7 @@
-import { ArrowDown, Plus } from "lucide-react";
+import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faTruck } from "@fortawesome/free-solid-svg-icons/faTruck";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Minus, Plus } from "lucide-react";
 
 export default function Cart() {
     return (
@@ -20,10 +23,13 @@ export default function Cart() {
                         Deliver to
                     </p>
                     <p className="text-sm">
-                        {localStorage.getItem("address") ?? "India"}
+                        {localStorage.getItem("name") ?? "User"}, 
+                        {" " + localStorage.getItem("house") ?? "house"}, 
+                        {" " + localStorage.getItem("area") ?? "area"} - 
+                        {" " + localStorage.getItem("pincode") ?? "123456"}
                     </p>
                 </div>
-                <button className="ml-4 border-2 border-[#00bcfc] text-[#00bcfc] px-4 py-2 rounded font-semibold">
+                <button className="ml-4 border-2 border-[#00bcfc] text-[#00bcfc] px-4 py-1 rounded font-semibold" onClick={_event => window.location.href='/address'}>
                     Change
                 </button>
             </div>
@@ -39,66 +45,96 @@ export default function Cart() {
                             width={60}
                             height={80}
                             alt="Gold bar"
-                            className="rounded-md align-middle"
+                            className="rounded-md pt-8 mr-2"
                         />
                         <div className="flex-1">
                             <h3 className="font-semibold">10g Lotus Rect Bar Making Charges</h3>
                             <p className="text-sm text-muted-foreground">10g Lotus Rect Bar Making Charges</p>
-                            <p className="text-xl font-bold mt-2">₹1,593</p>
+                            <p className="text-xl font-bold mt-2 "><span className="line-through pr-2">₹{localStorage.getItem("prize")}.00</span>₹0</p>
                             <div className="flex items-center text-sm text-muted-foreground mt-2">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="mr-2"
-                                >
-                                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                                    <path d="M7 15h0M2 9.5h20" />
-                                </svg>
+                                <FontAwesomeIcon icon={faTruck} className="mr-2" />
                                 Get it by 25th Aug
                             </div>
                         </div>
                     </div>
                     <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center border rounded-md">
-                            <button className="h-8 w-8 p-0" >
-                                1
+                            <button className="h-8 w-8 flex items-center justify-center p-0">
+                                <Minus className="h-4 w-4 text-gray-500" />
                             </button>
-                            <button className="h-8 w-8 p-0">
-                                <Plus className="h-4 w-4 text-[#00bcfc]" />
+                            <div className="h-8 w-8 flex items-center justify-center">
+                                1
+                            </div>
+                            <button className="h-8 w-8 flex items-center justify-center p-0">
+                                <Plus className="h-4 w-4 text-gray-500" />
                             </button>
                         </div>
+
                         <div className="space-x-2">
-                            <button className="h-8 border-2 p-2">
+                            <button className="border-2 p-2 text-gray-600 font-semibold rounded-md">
                                 Delete
                             </button>
-                            <button className="h-8 border-2 p-2">
+                            <button className="border-2 p-2 text-gray-600 font-semibold rounded-md">
                                 Save for later
                             </button>
                         </div>
                     </div>
                     <div className="pt-2" >
                         <p className="text-gray-600 text-sm">
-                            Return and cancellations 
+                            Return and cancellations
+                            <FontAwesomeIcon icon={faAngleDown} className="pl-1 pt-2" />
                         </p>
                     </div>
                 </div>
+
+                <hr />
+
+                <div className="p-2 text-[#00bcfc] font-bold ml-4">
+                    Apply Promocode
+                    <FontAwesomeIcon icon={faAngleRight} className="pl-1 pt-2" />
+                </div>
+
+                <div className="min-h-2 bg-gray-100">
+                </div>
+
+                <div className="p-4">
+                    <div className="p-2">
+                        <span className="font-bold">Bag Total</span>
+                    </div>
+                    <div>
+                        <div className="flex justify-between text-sm text-gray-500 pb-2">
+                            <p className="pl-2">Total MRP</p>
+                            <p className="pr-2">₹0</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="flex justify-between text-sm text-gray-500 pb-2">
+                            <p className="pl-2">Shipping Fee</p>
+                            <p className="pr-2">₹499</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="flex justify-between text-sm text-gray-500 pb-2">
+                            <p className="pl-2">Amount Payable</p>
+                            <p className="pr-2">₹499</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            {/* <footer className="sticky bottom-0 z-50 bg-[#00bcfc] text-white py-4">
+            <div className="min-h-32">
+            </div>
+
+
+            <footer className="sticky bottom-0 z-50 bg-[#00bcfc] text-white py-4">
                 <div className="max-w-4xl text-center">
                     <p className="text-xl font-bold">
                         <a href="/checkout">
-                            Proceed to Pay $199
+                            Proceed to Pay ₹499
                         </a> </p>
                 </div>
-            </footer> */}
+            </footer>
         </div>
     )
 }

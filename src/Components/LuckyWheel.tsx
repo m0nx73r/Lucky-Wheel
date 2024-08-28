@@ -22,12 +22,12 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
 
     // segement data
     const segments = [
-      "500 Cashback Points",
-      "100 Cashback Points",
-      "20 Cashback Points",
-      "5 Cashback Points",
-      "10 Cashback Points",
-      "10 Cashback Points",
+      "100 Gram Gold Bar",
+      "400 Gram Gold Bar",
+      "20 Gram Gold Bar",
+      "500 Gram Gold Bar",
+      "10 Gram Gold Bar",
+      "50 Gram Gold Bar",
     ];
     // segment colors
     const segColors = [
