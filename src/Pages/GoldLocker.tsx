@@ -1,3 +1,5 @@
+import firstPageAsset from '/first-page-asset.jpg';
+
 export default function GoldLocker() {
     return (
 <div className="flex flex-col min-h-screen bg-gradient-to-b from-[#dbf6ff] to-white p-4">
@@ -42,7 +44,7 @@ export default function GoldLocker() {
             </div>
         </div>
         <div className="flex justify-center mb-4">
-            <img src="../../src/assets/first-page-asset.jpg" alt="" width="500" height="50" />
+            <img src={firstPageAsset} alt="" width="500" height="50" />
         </div>
     </div>
     <footer className="bg-white p-2 shadow-md mt-auto mb-12">

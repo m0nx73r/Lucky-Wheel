@@ -2,6 +2,7 @@ import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faTruck } from "@fortawesome/free-solid-svg-icons/faTruck";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Minus, Plus } from "lucide-react";
+import goldBarImg from '/gold-bar.png';;
 
 export default function Cart() {
     return (
@@ -23,10 +24,10 @@ export default function Cart() {
                         Deliver to
                     </p>
                     <p className="text-sm">
-                        {localStorage.getItem("name") ?? "User"}, 
-                        {" " + localStorage.getItem("house") ?? "house"}, 
-                        {" " + localStorage.getItem("area") ?? "area"} - 
-                        {" " + localStorage.getItem("pincode") ?? "123456"}
+                        {localStorage.getItem("name")}, 
+                        {" " + localStorage.getItem("house")}, 
+                        {" " + localStorage.getItem("area")} - 
+                        {" " + localStorage.getItem("pincode")}
                     </p>
                 </div>
                 <button className="ml-4 border-2 border-[#00bcfc] text-[#00bcfc] px-4 py-1 rounded font-semibold" onClick={_event => window.location.href='/address'}>
@@ -41,7 +42,7 @@ export default function Cart() {
                 <div className="m-4 px-4 mt-4">
                     <div className="flex items-start space-x-4">
                         <img
-                            src="../../src/assets/gold-bar.png"
+                            src={goldBarImg}
                             width={60}
                             height={80}
                             alt="Gold bar"

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import goldBarImg from '../../src/assets/gold-bar.png'; // Adjust the path based on your project structure
+import goldBarImg from '/gold-bar.png'; // Adjust the path based on your project structure
 import { faCartShopping, faHeart, faSearch, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { SetStateAction, useState } from 'react';
 
