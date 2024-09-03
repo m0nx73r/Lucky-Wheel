@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Minus, Plus } from "lucide-react";
 import goldBarImg from '/gold-bar.png';;
 
+
 export default function Cart() {
     return (
         <div className="flex flex-col min-h-screen pt-4">
@@ -24,13 +25,13 @@ export default function Cart() {
                         Deliver to
                     </p>
                     <p className="text-sm">
-                        {localStorage.getItem("name")}, 
-                        {" " + localStorage.getItem("house")}, 
-                        {" " + localStorage.getItem("area")} - 
+                        {localStorage.getItem("name")},
+                        {" " + localStorage.getItem("house")},
+                        {" " + localStorage.getItem("area")} -
                         {" " + localStorage.getItem("pincode")}
                     </p>
                 </div>
-                <button className="ml-4 border-2 border-[#00bcfc] text-[#00bcfc] px-4 py-1 rounded font-semibold" onClick={_event => window.location.href='/address'}>
+                <button className="ml-4 border-2 border-[#00bcfc] text-[#00bcfc] px-4 py-1 rounded font-bold" onClick={_event => window.location.href = '/address'}>
                     Change
                 </button>
             </div>
@@ -38,7 +39,7 @@ export default function Cart() {
             <div className="min-h-1 bg-gray-200 mb-4">
             </div>
 
-            <div className="max-w-sm rounded-lg border bg-card text-card-foreground shadow-sm mx-auto">
+            <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
                 <div className="m-4 px-4 mt-4">
                     <div className="flex items-start space-x-4">
                         <img
@@ -49,12 +50,15 @@ export default function Cart() {
                             className="rounded-md pt-8 mr-2"
                         />
                         <div className="flex-1">
-                            <h3 className="font-semibold">10g Lotus Rect Bar Making Charges</h3>
-                            <p className="text-sm text-muted-foreground">10g Lotus Rect Bar Making Charges</p>
+                            <h3 className="font-bold text-sm">10g Lotus Rect Bar Making Charges</h3>
+                            <p className="text-xs text-muted-foreground">10g Lotus Rect Bar Making Charges</p>
                             <p className="text-xl font-bold mt-2 "><span className="line-through pr-2">₹{localStorage.getItem("prize")}.00</span>₹0</p>
                             <div className="flex items-center text-sm text-muted-foreground mt-2">
                                 <FontAwesomeIcon icon={faTruck} className="mr-2" />
-                                Get it by 25th Aug
+                                Get it by 
+                                <span className="font-bold pl-1">
+                                {new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() + ['th', 'st', 'nd', 'rd'][(new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 10 > 3 || Math.floor(new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 100 / 10) === 1) ? 0 : new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 10] + ' ' + new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleString('default', { month: 'short' })}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -72,10 +76,10 @@ export default function Cart() {
                         </div>
 
                         <div className="space-x-2">
-                            <button className="border-2 p-2 text-gray-600 font-semibold rounded-md">
+                            <button className="border-2 p-2 text-gray-600 font-bold rounded-md text-sm">
                                 Delete
                             </button>
-                            <button className="border-2 p-2 text-gray-600 font-semibold rounded-md">
+                            <button className="border-2 p-2 text-gray-600 font-bold rounded-md text-sm">
                                 Save for later
                             </button>
                         </div>
