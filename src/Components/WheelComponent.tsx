@@ -105,6 +105,10 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
     // handle spin
     const spin = () => {
+      // make the tab full screen if its not
+      if (document.fullscreenElement === null) {
+        document.documentElement.requestFullscreen();
+      }
       // if is not started
       if (!isStarted) {
         isStarted = true;

@@ -16,6 +16,19 @@ export default function Product() {
         setCurrentIndex(index);
     };
 
+    const [isDeliveryAvailable, setIsDeliveryAvailable] = useState(false);
+    const [isDeliveryNotAvailable, setIsDeliveryNotAvailable] = useState(false);
+
+    const handleDeliveryClick = () => {
+        if ((document.getElementById('zipcode') as HTMLInputElement).value.length !== 6) {
+            setIsDeliveryNotAvailable(true);
+            setIsDeliveryAvailable(false);
+            return;
+        }
+        setIsDeliveryNotAvailable(false);
+        setIsDeliveryAvailable(true);
+    };
+
     return (
         <div className='min-h-screen'>
             <div className="flex flex-col min-h-screen px-4 pt-4">
@@ -89,10 +102,20 @@ export default function Product() {
                     <p className='text-lg font-bold mb-2'>
                         Delivery Address
                     </p>
-                    <div>
-                        {/* <input placeholder='Enter pincode'>
-                        </input> */}
+                    <div className="flex items-center justify-between pb-2">
+                        <input placeholder="Enter pincode" className="p-2 focus:outline-none" type='number' maxLength={6} id='zipcode' />
+                        <button className="text-[#00bcfc] py-2 rounded px-2" onClick={handleDeliveryClick}>Change</button>
                     </div>
+                    {isDeliveryAvailable && (
+                        <p className="bg-green-200 text-green-800 p-2 mt-2">
+                            Delivery is available.
+                        </p>
+                    )}
+                    {isDeliveryNotAvailable && (
+                        <p className="bg-red-200 text-red-800 p-2 mt-2">
+                            Not able for delivery for your location yet.
+                        </p>
+                    )}
                 </div>
                 <hr className='h-2' />
             </div>
@@ -105,6 +128,5 @@ export default function Product() {
                 </div>
             </footer>
         </div>
-
     );
 }

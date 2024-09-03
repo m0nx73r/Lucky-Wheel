@@ -92,7 +92,9 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
             </p>
             {/* gif for modal */}
             
-            <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
+            {prize.split(" ")[0] !== "" && (
+              <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
+            )}
             <button
               className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
               onClick={handleCloseModal}
@@ -100,15 +102,16 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
               <CrossIcon />
             </button>
             <a 
-              href="/locker" 
               target="_self" 
+              href={prize.split(" ")[0] == "" ? "#" : "/locker"}
               onClick={() => {
                 const prizeValue = prize.split(" ")[0]; // Ensure `prize` is defined and is a string
                 localStorage.setItem("prize", prizeValue);
+                handleCloseModal();
               }}
             >
               <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white md:text-2xl font-bold text-[#1a1649]">
-                {prize.split(" ")[0] == "" ? "Spin Again" : "Get Delivery"}
+              {prize.split(" ")[0] == "" ? "Spin Again" : "Get Delivery"}
               </button>
             </a>
           </div>
