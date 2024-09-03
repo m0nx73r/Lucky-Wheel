@@ -33,11 +33,11 @@ export default function GoldLocker() {
             <div className="rounded-b-lg bg-[#e5f2f8] px-4 pt-1 shadow mb-4">
                 <div className="flex items-center justify-between">
                     <div>
-                        <p className="text-sm">Invested Amount</p>
+                        <p className="text-sm">Gold Balance</p>
                         <p className="text-lg font-bold">₹0.00</p>
                     </div>
                     <div className="text-right">
-                        <p className="text-sm font-semibold">Gold Balance</p>
+                        <p className="text-sm font-semibold">Gold Weight</p>
                         <p className="text-lg font-bold">0.00 g</p>
                     </div>
                 </div>
@@ -48,10 +48,10 @@ export default function GoldLocker() {
         </div>
     </div>
     <footer className="bg-white p-2 shadow-md mt-auto mb-12">
-        <div className="flex items-center justify-between">  
+    <button className="rounded-lg bg-[#00bcfc] text-white font-semibold p-2 w-full" onClick={_event =>  window.location.href='/product'}>Buy Now</button>
+        {/* <div className="flex items-center justify-between">  
             <button className="rounded-lg border-[#00bcfc] text-[#00bcfc] border-2 w-1/2 p-2 mx-2" onClick={_event =>  window.location.href='/product'}>Buy one time</button>
-            <button className="rounded-lg bg-[#00bcfc] text-white font-semibold w-1/2 p-2" onClick={_event =>  window.location.href='/product'}>Start SIP</button>
-        </div>
+        </div> */}
     </footer>
 </div>
     )

@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
+import { FC, memo, useEffect, useRef, useState } from "react";
 
 // types
 interface WheelComponentProps {
@@ -64,13 +64,13 @@ const WheelComponent: FC<WheelComponentProps> = memo(
       setTimeout(() => {
         window.scrollTo(0, 1);
       }, 0);
-    });
+    })
 
     // function for initialising the canvas as well as the wheel
-    const wheelInit = useCallback(() => {
+    const wheelInit = () => {
       initCanvas();
       wheelDraw();
-    }, []);
+    };
 
     const initCanvas = () => {
       const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -91,7 +91,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     useEffect(() => {
       // Load the icon image
       iconRef.current = new Image();
-      iconRef.current.src = "/gold.svg"; // Update with your actual path
+      iconRef.current.src = "/gold-bar.png"; // Update with your actual path
 
       // Initialize the wheel once the image is loaded
       iconRef.current.onload = () => {
@@ -194,58 +194,59 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     };
 
     // Draw a single segment of the wheel
-    const drawSegment = (key: number, lastAngle: number, angle: number) => {
-      const ctx = canvasContext;
-      const value = segments[key];
-      if (ctx) {
-        ctx.save();
+    // Draw a single segment of the wheel
+const drawSegment = (key: number, lastAngle: number, angle: number) => {
+  const ctx = canvasContext;
+  const value = segments[key];
+  if (ctx) {
+    ctx.save();
 
-        // Draw the segment
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, size, lastAngle, angle, false);
-        ctx.lineTo(centerX, centerY);
-        ctx.closePath();
-        ctx.fillStyle = segColors[key];
-        ctx.fill();
-        ctx.stroke();
+    // Draw the segment
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, size, lastAngle, angle, false);
+    ctx.lineTo(centerX, centerY);
+    ctx.closePath();
+    ctx.fillStyle = segColors[key];
+    ctx.fill();
+    ctx.stroke();
 
-        // Save the canvas state for text drawing
-        ctx.save();
+    // Save the canvas state for text drawing
+    ctx.save();
 
-        // Calculate the middle angle and text position
-        const middleAngle = (lastAngle + angle) / 2;
-        const textX = centerX + size * 0.75 * Math.cos(middleAngle); // Adjust text position towards the outer edge
-        const textY = centerY + size * 0.75 * Math.sin(middleAngle); // Adjust text position towards the outer edge
+    // Calculate the middle angle and text position
+    const middleAngle = (lastAngle + angle) / 2;
+    const textX = centerX + size * 0.75 * Math.cos(middleAngle); // Adjust text position towards the outer edge
+    const textY = centerY + size * 0.75 * Math.sin(middleAngle); // Adjust text position towards the outer edge
 
-        // Move the canvas context to the text center
-        ctx.translate(textX, textY);
+    // Move the canvas context to the text center
+    ctx.translate(textX, textY);
 
-        // Rotate the canvas context to align the text perpendicularly
-        const rotationAngle = middleAngle + Math.PI / 2;
-        ctx.rotate(rotationAngle);
+    // Rotate the canvas context to align the text perpendicularly
+    const rotationAngle = middleAngle + Math.PI / 2;
+    ctx.rotate(rotationAngle);
 
-        // Draw the text
-        ctx.fillStyle = contrastColor || "white";
-        ctx.font = "bold 10px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(value, 0, 0);
+    // Draw the text
+    ctx.fillStyle = contrastColor || "white";
+    ctx.font = "bold 12px roboto";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(value, 0, 0);
 
-        // Restore the canvas state
-        ctx.restore();
+    // Restore the canvas state
+    ctx.restore();
 
-        if (iconRef.current) {
-          const iconSize = size * 0.2; // Size of the icon (30% of the segment size)
-          const iconX =
-            centerX + (size / 2) * Math.cos(middleAngle) - iconSize / 2;
-          const iconY =
-            centerY + (size / 2) * Math.sin(middleAngle) - iconSize / 2;
+    // Draw the icon image only on every 2nd segment (even index)
+    if (key % 2 === 0 && iconRef.current) {
+      const iconSize = size * 0.2; // Size of the icon (20% of the segment size)
+      const iconX = centerX + (size / 2) * Math.cos(middleAngle) - iconSize / 2;
+      const iconY = centerY + (size / 2) * Math.sin(middleAngle) - iconSize / 2;
 
-          ctx.drawImage(iconRef.current, iconX, iconY, iconSize, iconSize);
-        }
-      }
-    };
+      ctx.drawImage(iconRef.current, iconX, iconY, iconSize, iconSize);
+    }
+  }
+};
+
 
     // draw the wheel
     const drawWheel = () => {

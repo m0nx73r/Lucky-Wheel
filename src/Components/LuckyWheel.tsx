@@ -23,11 +23,11 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
     // segement data
     const segments = [
       "100 Gram Gold Bar",
-      "400 Gram Gold Bar",
-      "20 Gram Gold Bar",
+      "",
       "500 Gram Gold Bar",
-      "10 Gram Gold Bar",
-      "50 Gram Gold Bar",
+      "",
+      "250 Gram Gold Bar",
+      "",
     ];
     // segment colors
     const segColors = [
@@ -81,7 +81,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-4">
           <div className="relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg backdrop-blur-sm bg-white bg-opacity-20 border border-white/30">
-            <p className="text-lg text-white font-semibold">YOU WON</p>
+            <p className="text-lg text-white font-semibold">{prize.split(" ")[0] == "" ? "Better Luck Next Time" : "YOU WON"}</p>
             {/* handle the amount  */}
             <p className="text-xl md:text-2xl font-bold text-[#fdbf15]">
               {prize.split(" ")[0]}
@@ -91,6 +91,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
               {prize.split(" ").slice(1).join(" ")}
             </p>
             {/* gif for modal */}
+            
             <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
             <button
               className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
@@ -107,7 +108,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
               }}
             >
               <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white md:text-2xl font-bold text-[#1a1649]">
-                Claim
+                {prize.split(" ")[0] == "" ? "Spin Again" : "Get Delivery"}
               </button>
             </a>
           </div>
