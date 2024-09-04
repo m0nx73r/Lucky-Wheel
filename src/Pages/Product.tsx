@@ -107,9 +107,24 @@ export default function Product() {
                         <button className="text-[#00bcfc] py-2 rounded px-2" onClick={handleDeliveryClick}>Change</button>
                     </div>
                     {isDeliveryAvailable && (
-                        <p className="bg-green-200 text-green-800 p-2 mt-2">
-                            Delivery is available.
-                        </p>
+                        <div className='bg-[#f2fafd] border-[#00bcfc] rounded-md border-2'>
+                            <div className='flex justify-between px-4 pt-4'>
+                                <div className='font-semibold'>
+                                    Delivery By {new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() + ['th', 'st', 'nd', 'rd'][(new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 10 > 3 || Math.floor(new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 100 / 10) === 1) ? 0 : new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 10] + ' ' + new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleString('default', { month: 'short' })}
+                                </div>
+                                <div className='font-semibold'>
+                                ₹499
+                                </div>
+                            </div>
+                            <div className='flex justify-between pb-4 px-4 text-gray-600'>
+                                <div className='text-sm'>
+                                    Standard Delivery
+                                </div>
+                                <div className='text-sm'>
+                                Shipping fee
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {isDeliveryNotAvailable && (
                         <p className="bg-red-200 text-red-800 p-2 mt-2">

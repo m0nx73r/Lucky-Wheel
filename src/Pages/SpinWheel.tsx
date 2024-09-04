@@ -29,7 +29,7 @@ const SpinWheel = memo(() => {
       className="relative overflow-hidden min-h-screen flex flex-col  justify-center items-center "
       style={{
         backgroundImage: `url(${bg})`,
-        backgroundSize: "contain",
+        backgroundSize: window.innerWidth <= 768 ? "cover" : "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
