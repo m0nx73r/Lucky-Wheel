@@ -103,7 +103,7 @@ export default function Product() {
                         Delivery Address
                     </p>
                     <div className="flex items-center justify-between pb-2">
-                        <input placeholder="Enter pincode" className="p-2 focus:outline-none" type='number' maxLength={6} id='zipcode' />
+                        <input placeholder="Enter pincode" className="p-2 focus:outline-none border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-b-[#00bcfc]" type='number' maxLength={6} id='zipcode' />
                         <button className="text-[#00bcfc] py-2 rounded px-2" onClick={handleDeliveryClick}>Change</button>
                     </div>
                     {isDeliveryAvailable && (
@@ -132,7 +132,6 @@ export default function Product() {
                         </p>
                     )}
                 </div>
-                <hr className='h-2' />
             </div>
             <footer className="sticky bottom-0 z-50 bg-[#00bcfc] text-white py-4">
                 <div className="max-w-4xl text-center">

@@ -45,7 +45,7 @@ export default function Address() {
             <div className="mb-8 text-base">
                 <input
                     type="text"
-                    className="w-full border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
+                    className="w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
                     placeholder="Full Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -58,7 +58,7 @@ export default function Address() {
                 <input
                     type="number"
                     maxLength={10}
-                    className="w-full border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
+                    className="w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
                     placeholder="Mobile Number"
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
@@ -69,7 +69,7 @@ export default function Address() {
                 <input
                     type="number"
                     maxLength={10}
-                    className="w-full border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
+                    className="w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
                     placeholder="Pincode"
                     value={pincode}
                     onChange={(e) => setPincode(e.target.value)}
@@ -79,7 +79,7 @@ export default function Address() {
             <div className="mb-8 text-base">
                 <input
                     type="text"
-                    className="w-full border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
+                    className="w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
                     placeholder="House No., Apartment Name"
                     value={house}
                     onChange={(e) => setHouse(e.target.value)}
@@ -89,7 +89,7 @@ export default function Address() {
             <div className="mb-8 text-base">
                 <input
                     type="text"
-                    className="w-full border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
+                    className="w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-[#00bcfc]"
                     placeholder="Road, Area, Locality"
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
@@ -142,7 +142,7 @@ export default function Address() {
                     </label>
                 </div>
 
-                <footer className="sticky bottom-0 z-50 bg-[#00bcfc] text-white py-4">
+                <footer className="sticky bottom-0 z-50 bg-[#00bcfc] text-white py-4 rounded-md px-4">
                     <div className="max-w-4xl text-center">
                         <p className="text-xl font-bold">
                             <a href="/cart" onClick={handleContinue}>

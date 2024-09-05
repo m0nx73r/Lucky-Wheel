@@ -21,10 +21,10 @@ export default function Cart() {
             </header>
             <div className="p-2 text-gray-600 flex items-center justify-between px-4">
                 <div className="flex flex-col">
-                    <p className="font-semibold">
+                    <p className="font-semibold pb-1">
                         Deliver to
                     </p>
-                    <p className="text-sm">
+                    <p className="text-sm w-5/6">
                         {localStorage.getItem("name")},
                         {" " + localStorage.getItem("house")},
                         {" " + localStorage.getItem("area")} -
@@ -52,7 +52,7 @@ export default function Cart() {
                         <div className="flex-1">
                             <h3 className="font-bold text-sm">10g Lotus Rect Bar Making Charges</h3>
                             <p className="text-xs text-muted-foreground">10g Lotus Rect Bar Making Charges</p>
-                            <p className="text-xl font-bold mt-2 "><span className="line-through pr-2">₹{localStorage.getItem("prize")}.00</span>₹0</p>
+                            <p className="text-xl mt-2 "><span className="line-through pr-2">₹{localStorage.getItem("prize")}.00</span><span className="font-bold">₹0</span></p>
                             <div className="flex items-center text-sm text-muted-foreground mt-2">
                                 <FontAwesomeIcon icon={faTruck} className="mr-2" />
                                 Get it by 
@@ -71,7 +71,7 @@ export default function Cart() {
                                 1
                             </div>
                             <button className="h-8 w-8 flex items-center justify-center p-0">
-                                <Plus className="h-4 w-4 text-gray-500" />
+                                <Plus className="h-4 w-4 text-[#00bcfc]" />
                             </button>
                         </div>
 
@@ -132,8 +132,8 @@ export default function Cart() {
             </div>
 
 
-            <footer className="sticky bottom-0 z-50 bg-[#00bcfc] text-white py-4">
-                <div className="max-w-4xl text-center">
+            <footer className="sticky rounded-lg bottom-0 z-50 bg-[#00bcfc] text-white py-4">
+                <div className="max-w  text-center">
                     <p className="text-xl font-bold">
                         <a href="/checkout">
                             Proceed to Pay ₹499
