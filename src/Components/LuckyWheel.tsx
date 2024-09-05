@@ -80,7 +80,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
         />
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-blue-900 bg-opacity-50 z-50 p-4">
-            <div className="relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg backdrop-blur-lg bg-blue-900 border border-white/30">
+            <div className="relative py-12 w-5/6 max-w-md flex flex-col items-center rounded-2xl shadow-lg backdrop-blur-lg bg-blue-900 border border-white/30">
               <p className="text-white font-bold text-2xl">{prize.split(" ")[0] == "\n" ? "Better Luck Next Time" : "YOU WON"}</p>
               {/* handle the amount  */}
               <p className="text-2xl font-bold text-lime-300">
@@ -98,7 +98,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
               <p className="text-lg md:text-xl text-white font-semibold">
                 {
                   prize.split(" ")[0] !== "\n" ? (
-                    `Worth of Gold Bar (${new Intl.NumberFormat('en-IN').format(parseInt(prize.split(" ")[0]))}g)`
+                    <>Worth of Gold Bar <span className="text-lime-300">({new Intl.NumberFormat('en-IN').format(parseInt(prize.split(" ")[0]))}g)</span></>
                   ) : (
                     <div className="pt-2"></div>
                   )
