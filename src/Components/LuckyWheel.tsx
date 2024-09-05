@@ -1,6 +1,6 @@
 import { useState, useRef, memo } from "react";
 import WheelComponent from "./WheelComponent";
-import gift from "../../src/assets/gift.gif";
+import gift from "../../public/1g-gold-bar.jpg";
 import { CrossIcon } from "./Icons";
 
 interface LuckyWheelProps {
@@ -79,44 +79,59 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
           downDuration={700} // duration for spin
         />
         {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-4">
-          <div className="relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg backdrop-blur-sm bg-white bg-opacity-20 border border-white/30">
-            <p className="text-lg text-white font-semibold">{prize.split(" ")[0] == "\n" ? "Better Luck Next Time" : "YOU WON"}</p>
-            {/* handle the amount  */}
-            <p className="text-xl md:text-2xl font-bold text-[#fdbf15]">
-              {prize.split(" ")[0]}
-            </p>
-            {/* handle the text after amount */}
-            <p className="text-lg md:text-xl text-white font-semibold">
-              {prize.split(" ").slice(1).join(" ")}
-            </p>
-            {/* gif for modal */}
-            
-            {prize.split(" ")[0] !== "\n" && (
-              <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
-            )}
-            <button
-              className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
-              onClick={handleCloseModal}
-            >
-              <CrossIcon />
-            </button>
-            <a 
-              target="_self" 
-              href={prize.split(" ")[0] == "\n" ? "#" : "/locker"}
-              onClick={() => {
-                const prizeValue = prize.split(" ")[0]; // Ensure `prize` is defined and is a string
-                localStorage.setItem("prize", prizeValue);
-                handleCloseModal();
-              }}
-            >
-              <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white md:text-2xl font-bold text-[#1a1649]">
-              {prize.split(" ")[0] == "\n" ? "Spin Again" : "Get Delivery"}
+          <div className="fixed inset-0 flex items-center justify-center bg-blue-900 bg-opacity-50 z-50 p-4">
+            <div className="relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg backdrop-blur-lg bg-blue-900 border border-white/30">
+              <p className="text-white font-bold text-2xl">{prize.split(" ")[0] == "\n" ? "Better Luck Next Time" : "YOU WON"}</p>
+              {/* handle the amount  */}
+              <p className="text-2xl font-bold text-lime-300">
+                {
+                  prize.split(" ")[0] !== "\n" ? (
+                    `₹${new Intl.NumberFormat('en-IN').format(parseInt(prize.split(" ")[0]) * 6978)}`
+                  ) : (
+                    ""
+                  )
+                }
+              </p>
+
+
+              {/* handle the text after amount */}
+              <p className="text-lg md:text-xl text-white font-semibold">
+                {
+                  prize.split(" ")[0] !== "\n" ? (
+                    `Worth of Gold Bar (${new Intl.NumberFormat('en-IN').format(parseInt(prize.split(" ")[0]))}g)`
+                  ) : (
+                    <div className="pt-2"></div>
+                  )
+                }
+              </p>
+
+              {/* gif for modal */}
+
+              {prize.split(" ")[0] !== "\n" && (
+                <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
+              )}
+              <button
+                className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
+                onClick={handleCloseModal}
+              >
+                <CrossIcon />
               </button>
-            </a>
+              <a
+                target="_self"
+                href={prize.split(" ")[0] == "\n" ? "#" : "/locker"}
+                onClick={() => {
+                  const prizeValue = prize.split(" ")[0]; // Ensure `prize` is defined and is a string
+                  localStorage.setItem("prize", prizeValue);
+                  handleCloseModal();
+                }}
+              >
+                <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-[#00bcfc] md:text-2xl font-bold text-white">
+                  {prize.split(" ")[0] == "\n" ? "Spin Again" : "Get Delivery"}
+                </button>
+              </a>
+            </div>
           </div>
-        </div>
-        
+
         )}
         {/* Audio elements */}
         <audio ref={spinSound} src="../../spin.mp3" preload="auto" />
