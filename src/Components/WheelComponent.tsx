@@ -144,29 +144,25 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         progress = duration / upTime;
         angleDelta = maxSpeed * Math.sin((progress * Math.PI) / 2); // Increase speed using sine function
       } else {
-        if (winningSegment) {
-          if (currentSegment === winningSegment && frames > segments.length) {
-            progress = duration / upTime;
+        progress = duration / upTime;
+        if (winningSegment && !finished) {
+          if (currentSegment === winningSegment && frames > segments.length * 30) {
+            progress = duration / downTime;
             angleDelta =
               maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2); // Decelerate smoothly
-            progress = 1;
-          } else {
+              progress = 1
+            } else {
             progress = duration / downTime;
             angleDelta =
               maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2); // Continue deceleration
           }
         } else {
-          progress = duration / downTime;
-          if (progress >= 0.8) {
-            angleDelta =
-              (maxSpeed / 1.2) *
-              Math.sin((progress * Math.PI) / 2 + Math.PI / 2); // Further slow down
-          } else if (progress >= 0.98) {
-            angleDelta =
-              (maxSpeed / 2) * Math.sin((progress * Math.PI) / 2 + Math.PI / 2); // Almost stop
+          if (progress >= 0.98) {
+            angleDelta = (maxSpeed / 2) * Math.sin((progress * Math.PI) / 2 + Math.PI / 2);
+          } else if (progress >= 0.8) {
+            angleDelta = (maxSpeed / 1.2) * Math.sin((progress * Math.PI) / 2 + Math.PI / 2);
           } else {
-            angleDelta =
-              maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2); // Continue slowing down
+            angleDelta = maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2);
           }
         }
         if (progress >= 1) finished = true; // Mark as finished if progress is complete
