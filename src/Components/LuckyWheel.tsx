@@ -1,6 +1,6 @@
 import { useState, useRef, memo } from "react";
 import WheelComponent from "./WheelComponent";
-import { CrossIcon } from "./Icons";
+// import { CrossIcon } from "./Icons";
 
 interface LuckyWheelProps {
   onSpin?: () => void; // Define the type of the onSpin callback
@@ -130,12 +130,12 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
               {prize.split(" ")[0] !== "Better" && (
                 <img src={`prize_${prize.split(" ")[0]}g.png`} alt="Gift" className="h-40 md:h-60 mt-4" />
               )}
-              <button
+              {/* <button
                 className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
                 onClick={handleCloseModal}
               >
                 <CrossIcon />
-              </button>
+              </button> */}
               <a
                 target="_self"
                 href={prize.split(" ")[0] == "Better" ? "#" : "/locker"}
