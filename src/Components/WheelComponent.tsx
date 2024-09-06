@@ -138,60 +138,63 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     const getTargetAngle = () => {
       const winningIndex = segments.indexOf(winningSegment);
       if (winningIndex === -1) return null;
-      
+
       const segmentAngle = (Math.PI * 2) / segments.length;
       return (3 * Math.PI) / 2 - (winningIndex * segmentAngle) - (segmentAngle / 2);
     }
-
     const onTimerTick = () => {
       frames++;
       draw();
-      const duration = new Date().getTime() - spinStart;
-      let progress = 0;
-      let finished = false;
-    
       const totalDuration = upTime + downTime;
+      const duration = new Date().getTime() - spinStart;
+      let progress = duration / totalDuration;
+      let finished = false;
+      
     
-      if (duration < upTime) {
-        // Extended acceleration phase
-        progress = duration / upTime;
-        angleDelta = maxSpeed * (1 - Math.pow(1 - progress, 3)); // Easing function for smoother acceleration
-      } else if (duration < totalDuration) {
-        // Deceleration phase
-        progress = (duration - upTime) / downTime;
-        const targetAngle = getTargetAngle();
-    
-        if (winningSegment && targetAngle !== null) {
-          // Ensure minimum rotations
-          const minimumAngle = minSpinRotations * Math.PI * 2;
-          if (totalSpinAngle < minimumAngle) {
-            angleDelta = maxSpeed * (1 - Math.pow(progress, 2));
-          } else {
-            // Calculate the shortest path to the target angle
-            let angleDifference = targetAngle - (angleCurrent % (Math.PI * 2));
-            if (angleDifference < 0) angleDifference += Math.PI * 2;
-            if (angleDifference > Math.PI) angleDifference -= Math.PI * 2;
-    
-            // Decelerate towards the target angle
-            // Smoother easing with a smaller multiplier
-            angleDelta = angleDifference * (1 - Math.pow(progress, 4)) * 0.1;
-    
-            // Gradually reduce speed as we approach the target
-            if (Math.abs(angleDifference) < 0.05 && progress > 0.8) {
-              angleDelta *= 0.5; // Slow down further when close
-            }
-    
-            // Check if we're close enough to stop
-            if (Math.abs(angleDifference) < 0.01 && progress > 0.95) {
-              finished = true;
-            }
-          }
+      if (duration < totalDuration) {
+        if (duration < upTime) {
+          // Acceleration phase
+          const accelerationProgress = duration / upTime;
+          angleDelta = maxSpeed * Math.pow(accelerationProgress, 2); // Easing function for smoother acceleration
         } else {
-          // If no winning segment, use a smooth deceleration
-          angleDelta = maxSpeed * (1 - Math.pow(progress, 2));
+          // Deceleration phase
+          const decelerationProgress = (duration - upTime) / downTime;
+          const targetAngle = getTargetAngle();
+    
+          if (winningSegment && targetAngle !== null) {
+            // Ensure minimum rotations
+            const minimumAngle = minSpinRotations * Math.PI * 2;
+          
+            if (totalSpinAngle < minimumAngle) {
+              // Continue spinning at max speed until minimum rotations are reached
+              angleDelta = maxSpeed;
+            } else {
+              // Calculate the shortest path to the target angle
+              let angleDifference = targetAngle - (angleCurrent % (Math.PI * 2));
+              if (angleDifference < 0) angleDifference += Math.PI * 2;
+              if (angleDifference > Math.PI) angleDifference -= Math.PI * 2;
+    
+              // Decelerate towards the target angle
+              // Use a custom easing function for smoother deceleration
+              const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+              angleDelta = angleDifference * easeOutCubic(decelerationProgress) * 0.1;
+    
+              // Gradually reduce speed as we approach the target
+              if (Math.abs(angleDifference) < 0.1 && decelerationProgress > 0.8) {
+                angleDelta *= 0.5; // Slow down further when close
+              }
+    
+              // Check if we're close enough to stop
+              if (Math.abs(angleDifference) < 0.001 && decelerationProgress > 0.95) {
+                finished = true;
+              }
+            }
+          } else {
+            // If no winning segment, use a smooth deceleration
+            angleDelta = maxSpeed * (1 - Math.pow(decelerationProgress, 2));
+          }
         }
       } else {
-        // Ensure we stop after the total duration
         finished = true;
       }
     
@@ -207,7 +210,6 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         angleDelta = 0;
       }
     };
-    
 
 
     // Draw the entire wheel and needle
@@ -226,57 +228,59 @@ const WheelComponent: FC<WheelComponentProps> = memo(
 
     // Draw a single segment of the wheel
     // Draw a single segment of the wheel
-const drawSegment = (key: number, lastAngle: number, angle: number) => {
-  const ctx = canvasContext;
-  const value = segments[key];
-  if (ctx) {
-    ctx.save();
+    const drawSegment = (key: number, lastAngle: number, angle: number) => {
+      const ctx = canvasContext;
+      const value = segments[key];
+      if (ctx) {
+        ctx.save();
 
-    // Draw the segment
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, size, lastAngle, angle, false);
-    ctx.lineTo(centerX, centerY);
-    ctx.closePath();
-    ctx.fillStyle = segColors[key];
-    ctx.fill();
-    ctx.stroke();
+        // Draw the segment
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, size, lastAngle, angle, false);
+        ctx.lineTo(centerX, centerY);
+        ctx.closePath();
+        ctx.fillStyle = segColors[key];
+        ctx.fill();
+        ctx.stroke();
 
-    // Save the canvas state for text drawing
-    ctx.save();
+        // Save the canvas state for text drawing
+        ctx.save();
 
-    // Calculate the middle angle and text position
-    const middleAngle = (lastAngle + angle) / 2;
-    const textX = centerX + size * 0.75 * Math.cos(middleAngle); // Adjust text position towards the outer edge
-    const textY = centerY + size * 0.75 * Math.sin(middleAngle); // Adjust text position towards the outer edge
+        // Calculate the middle angle and text position
+        const middleAngle = (lastAngle + angle) / 2;
+        const textX = centerX + size * 0.75 * Math.cos(middleAngle); // Adjust text position towards the outer edge
+        const textY = centerY + size * 0.75 * Math.sin(middleAngle); // Adjust text position towards the outer edge
 
-    // Move the canvas context to the text center
-    ctx.translate(textX, textY);
+        // Move the canvas context to the text center
+        ctx.translate(textX, textY);
 
-    // Rotate the canvas context to align the text perpendicularly
-    const rotationAngle = middleAngle + Math.PI / 2;
-    ctx.rotate(rotationAngle);
+        // Rotate the canvas context to align the text perpendicularly
+        const rotationAngle = middleAngle + Math.PI / 2;
+        ctx.rotate(rotationAngle);
 
-    // Draw the text
-    ctx.fillStyle = contrastColor || "white";
-    ctx.font = "bold 12px roboto";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(value, 0, 0);
+        // Draw the text
+        ctx.fillStyle = contrastColor || "white";
+        ctx.font = "bold 11px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(value, 0, 0);
 
-    // Restore the canvas state
-    ctx.restore();
+        // Restore the canvas state
+        ctx.restore();
 
-    // Draw the icon image only on every 2nd segment (even index)
-    if (key % 2 === 0 && iconRef.current) {
-      const iconSize = size * 0.2; // Size of the icon (20% of the segment size)
-      const iconX = centerX + (size / 2) * Math.cos(middleAngle) - iconSize / 2;
-      const iconY = centerY + (size / 2) * Math.sin(middleAngle) - iconSize / 2;
+        // Draw the icon image only on every 2nd segment (even index)
+        if (key % 2 === 0 && iconRef.current) {
+          // iconRef.current.src = `prize_${key}.jpg`
+          // console.log(iconRef.current.src);
+          const iconSize = size * 0.2; // Size of the icon (20% of the segment size)
+          const iconX = centerX + (size / 2) * Math.cos(middleAngle) - iconSize / 2;
+          const iconY = centerY + (size / 2) * Math.sin(middleAngle) - iconSize / 2;
 
-      ctx.drawImage(iconRef.current, iconX, iconY, iconSize, iconSize);
-    }
-  }
-};
+          ctx.drawImage(iconRef.current, iconX, iconY, iconSize, iconSize);
+        }
+      }
+    };
 
 
     // draw the wheel

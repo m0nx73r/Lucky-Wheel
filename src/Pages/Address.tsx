@@ -105,7 +105,7 @@ export default function Address() {
                             name="addressType"
                             id="Home"
                             value="Home"
-                            className="checked:bg-[#00bcfc] checked:hover:bg-[#00bcfc] checked:active:bg-[#00bcfc] checked:focus:bg-[#00bcfc] focus:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-[#00bcfc]"
+                            className="checked:bg-[#00bcfc] checked:hover:bg-[#00bcfc] checked:active:bg-[#00bcfc] checked:focus:bg-[#00bcfc] focus:outline-none focus:ring-1 focus:ring-[#00bcfc]"
                         />
                         <span>Home</span>
                     </label>
@@ -115,7 +115,7 @@ export default function Address() {
                             name="addressType"
                             id="Office"
                             value="Office"
-                            className="checked:bg-[#00bcfc] checked:hover:bg-[#00bcfc] checked:active:bg-[#00bcfc] checked:focus:bg-[#00bcfc] focus:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-[#00bcfc]"
+                            className="checked:bg-[#00bcfc] checked:hover:bg-[#00bcfc] checked:active:bg-[#00bcfc] checked:focus:bg-[#00bcfc] focus:outline-none focus:ring-1 focus:ring-[#00bcfc]"
                         />
                         <span>Office</span>
                     </label>
@@ -125,7 +125,7 @@ export default function Address() {
                             name="addressType"
                             id="Other"
                             value="Other"
-                            className="checked:bg-[#00bcfc] checked:hover:bg-[#00bcfc] checked:active:bg-[#00bcfc] checked:focus:bg-[#00bcfc] focus:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-[#00bcfc]"
+                            className="checked:bg-[#00bcfc] checked:hover:bg-[#00bcfc] checked:active:bg-[#00bcfc] checked:focus:bg-[#00bcfc] focus:outline-none focus:ring-1 focus:ring-[#00bcfc]"
                         />
 
                         <span>Other</span>

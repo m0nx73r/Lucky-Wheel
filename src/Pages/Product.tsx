@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import goldBarImg from '/gold-bar.png'; // Adjust the path based on your project structure
 import { faCartShopping, faHeart, faSearch, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { SetStateAction, useState } from 'react';
 
 const images = [
-    goldBarImg,
-    goldBarImg,
-    goldBarImg,
+    `/product/${localStorage.getItem("prize")}gm-a.jpg`,
+    `/product/${localStorage.getItem("prize")}gm-b.jpg`,
+    `/product/${localStorage.getItem("prize")}gm-c.jpg`,
+    `/product/${localStorage.getItem("prize")}gm-d.jpg`,
 ];
 
 export default function Product() {
@@ -59,7 +59,7 @@ export default function Product() {
                         >
                             {images.map((src, index) => (
                                 <div key={index} className="flex-shrink-0 w-full h-80 md:h-96">
-                                    <img src={src} alt={`Slide ${index + 1}`} className="object-cover w-full h-full" />
+                                    <img src={src} alt={`Slide ${index + 1}`} className="object-contain w-full h-full" />
                                 </div>
                             ))}
                         </div>
@@ -89,7 +89,8 @@ export default function Product() {
 
                 <div>
                     <p className='text-xl'>
-                        MRP <span className='font-bold'>₹{localStorage.getItem("prize")}.00</span>
+                        MRP <span className='line-through'>₹{new Intl.NumberFormat('en-IN').format(parseFloat((localStorage.getItem("prize")) ?? "")  * 7658.6)}</span>
+                        <span className='font-bold text-[#a3ec17] pl-2'>FREE</span>
                     </p>
                     <p className='text-gray-500 text-sm'>
                         Inclusive of all taxes
@@ -113,7 +114,7 @@ export default function Product() {
                                     Delivery By {new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() + ['th', 'st', 'nd', 'rd'][(new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 10 > 3 || Math.floor(new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 100 / 10) === 1) ? 0 : new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate() % 10] + ' ' + new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleString('default', { month: 'short' })}
                                 </div>
                                 <div className='font-semibold'>
-                                ₹499
+                                    ₹499
                                 </div>
                             </div>
                             <div className='flex justify-between pb-4 px-4 text-gray-600'>
@@ -121,7 +122,7 @@ export default function Product() {
                                     Standard Delivery
                                 </div>
                                 <div className='text-sm'>
-                                Shipping fee
+                                    Shipping fee
                                 </div>
                             </div>
                         </div>
@@ -137,7 +138,7 @@ export default function Product() {
                 <div className="max-w-4xl text-center">
                     <p className="text-xl font-bold">
                         <a href="/address">
-                            Buy for <span className='line-through'>₹{localStorage.getItem("prize")}</span> ₹0
+                            Buy for <span className='line-through'>₹{parseInt(localStorage.getItem("prize") ?? "")  * 7658.6}</span> ₹0
                         </a> </p>
                 </div>
             </footer>

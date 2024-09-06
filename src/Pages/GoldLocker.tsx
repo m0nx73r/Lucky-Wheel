@@ -21,7 +21,7 @@ export default function GoldLocker() {
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text-sm">Balance</p>
-                        <p className="text-xl font-bold">₹{localStorage.getItem("prize")}.00</p>
+                        <p className="text-xl font-bold">₹{new Intl.NumberFormat('en-IN').format(parseFloat((localStorage.getItem("prize")) ?? "") * 7658.6)}</p>
                     </div>
                     <div className="text-right">
                         <p className="text-sm font-semibold">MMTC-PAMP🪙</p>
