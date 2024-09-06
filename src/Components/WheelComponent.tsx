@@ -33,7 +33,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     audioStatus,
     isOnlyOnce = true,
     size = 290,
-    upDuration = 1000,
+    upDuration = 800,
     downDuration = 100,
   }) => {
     // local state for handling the completion of spin
@@ -47,7 +47,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     let angleDelta = 0;
     let canvasContext: CanvasRenderingContext2D | null = null;
     let maxSpeed = Math.PI / segments.length;
-    const upTime = segments.length * upDuration;
+    const upTime = segments.length * upDuration * 5;
     const downTime = segments.length * downDuration;
     let spinStart = 0;
     let frames = 0;
@@ -132,52 +132,83 @@ const WheelComponent: FC<WheelComponentProps> = memo(
       if (!audioStatus && spinSound.current) spinSound.current.play(); // Play spin sound
     };
 
-    // Timer tick handler for spinning
+    let totalSpinAngle = 0;
+    const minSpinRotations = 35; // Increased to 35 (5 original + 30 additional)
+
+    const getTargetAngle = () => {
+      const winningIndex = segments.indexOf(winningSegment);
+      if (winningIndex === -1) return null;
+      
+      const segmentAngle = (Math.PI * 2) / segments.length;
+      return (3 * Math.PI) / 2 - (winningIndex * segmentAngle) - (segmentAngle / 2);
+    }
+
     const onTimerTick = () => {
       frames++;
-      draw(); // Redraw the wheel on each tick
-      const duration = new Date().getTime() - spinStart; // Calculate the duration since spin started
+      draw();
+      const duration = new Date().getTime() - spinStart;
       let progress = 0;
       let finished = false;
-
+    
+      const totalDuration = upTime + downTime;
+    
       if (duration < upTime) {
+        // Extended acceleration phase
         progress = duration / upTime;
-        angleDelta = maxSpeed * Math.sin((progress * Math.PI) / 2); // Increase speed using sine function
-      } else {
-        progress = duration / upTime;
-        if (winningSegment && !finished) {
-          if (currentSegment === winningSegment && frames > segments.length * 30) {
-            progress = duration / downTime;
-            angleDelta =
-              maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2); // Decelerate smoothly
-              progress = 1
-            } else {
-            progress = duration / downTime;
-            angleDelta =
-              maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2); // Continue deceleration
+        angleDelta = maxSpeed * (1 - Math.pow(1 - progress, 3)); // Easing function for smoother acceleration
+      } else if (duration < totalDuration) {
+        // Deceleration phase
+        progress = (duration - upTime) / downTime;
+        const targetAngle = getTargetAngle();
+    
+        if (winningSegment && targetAngle !== null) {
+          // Ensure minimum rotations
+          const minimumAngle = minSpinRotations * Math.PI * 2;
+          if (totalSpinAngle < minimumAngle) {
+            angleDelta = maxSpeed * (1 - Math.pow(progress, 2));
+          } else {
+            // Calculate the shortest path to the target angle
+            let angleDifference = targetAngle - (angleCurrent % (Math.PI * 2));
+            if (angleDifference < 0) angleDifference += Math.PI * 2;
+            if (angleDifference > Math.PI) angleDifference -= Math.PI * 2;
+    
+            // Decelerate towards the target angle
+            // Smoother easing with a smaller multiplier
+            angleDelta = angleDifference * (1 - Math.pow(progress, 4)) * 0.1;
+    
+            // Gradually reduce speed as we approach the target
+            if (Math.abs(angleDifference) < 0.05 && progress > 0.8) {
+              angleDelta *= 0.5; // Slow down further when close
+            }
+    
+            // Check if we're close enough to stop
+            if (Math.abs(angleDifference) < 0.01 && progress > 0.95) {
+              finished = true;
+            }
           }
         } else {
-          if (progress >= 0.98) {
-            angleDelta = (maxSpeed / 2) * Math.sin((progress * Math.PI) / 2 + Math.PI / 2);
-          } else if (progress >= 0.8) {
-            angleDelta = (maxSpeed / 1.2) * Math.sin((progress * Math.PI) / 2 + Math.PI / 2);
-          } else {
-            angleDelta = maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2);
-          }
+          // If no winning segment, use a smooth deceleration
+          angleDelta = maxSpeed * (1 - Math.pow(progress, 2));
         }
-        if (progress >= 1) finished = true; // Mark as finished if progress is complete
+      } else {
+        // Ensure we stop after the total duration
+        finished = true;
       }
-
-      angleCurrent += angleDelta; // Update the current angle
-      while (angleCurrent >= Math.PI * 2) angleCurrent -= Math.PI * 2; // Normalize the angle
+    
+      angleCurrent += angleDelta;
+      totalSpinAngle += angleDelta;
+      while (angleCurrent >= Math.PI * 2) angleCurrent -= Math.PI * 2;
+    
       if (finished) {
-        setFinished(true); // Mark the spin as finished
-        onFinished(currentSegment); // Call the onFinished callback with the winning segment
-        clearInterval(timerHandle); // Clear the spin timer
+        setFinished(true);
+        onFinished(currentSegment);
+        clearInterval(timerHandle);
         timerHandle = 0;
         angleDelta = 0;
       }
     };
+    
+
 
     // Draw the entire wheel and needle
     const wheelDraw = () => {
