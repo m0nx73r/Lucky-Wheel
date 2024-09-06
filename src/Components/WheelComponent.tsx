@@ -147,7 +147,6 @@ const WheelComponent: FC<WheelComponentProps> = memo(
       draw();
       const totalDuration = upTime + downTime;
       const duration = new Date().getTime() - spinStart;
-      let progress = duration / totalDuration;
       let finished = false;
       
     
