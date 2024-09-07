@@ -88,7 +88,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
           downDuration={700} // duration for spin
         />
         {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-blue-900 bg-opacity-50 z-10 p-4">
+          <div className="fixed inset-0 flex items-center justify-center bg-blue-900 bg-opacity-50 z-10 p-4 backdrop-blur-md">
             <div className="relative py-12 w-5/6 max-w-md flex flex-col items-center rounded-2xl shadow-lg backdrop-blur-lg bg-blue-900 border border-white/30">
             {
               prize.split(" ")[0] != "Better"  ? 
