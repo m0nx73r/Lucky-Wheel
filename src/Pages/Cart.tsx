@@ -2,8 +2,9 @@ import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faTruck } from "@fortawesome/free-solid-svg-icons/faTruck";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Minus, Plus } from "lucide-react";
-import goldBarImg from '/gold-bar.png';;
 
+
+const goldBarImg = `prize_${localStorage.getItem("prize")?.split(" ")[0]}g.png`
 
 export default function Cart() {
     return (
@@ -47,7 +48,7 @@ export default function Cart() {
                             width={60}
                             height={80}
                             alt="Gold bar"
-                            className="rounded-md pt-8 mr-2"
+                            className="rounded-md pt-4 mx-2"
                         />
                         <div className="flex-1">
                             <h3 className="font-bold text-sm">{localStorage.getItem("prize")}g Lotus Rect Bar Making Charges</h3>
