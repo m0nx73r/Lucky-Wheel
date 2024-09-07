@@ -106,7 +106,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
               <p className="text-2xl font-bold text-[#a3ec17]">
                 {
                   prize.split(" ")[0] !== "Better" ? (
-                    `₹${new Intl.NumberFormat('en-IN').format(parseInt(prize.split(" ")[0]) * 7000)}`
+                    `₹${new Intl.NumberFormat('en-IN').format(parseInt(prize.split(" ")[0]) * 7658.6)}`
                   ) : (
                     ""
                   )
