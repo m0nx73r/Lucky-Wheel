@@ -20,8 +20,8 @@ export default function GoldLocker() {
             <div className="rounded-t-lg bg-white p-4 shadow mb-4">
                 <div className="flex items-center justify-between">
                     <div>
-                        <p className="text-sm">Balance</p>
-                        <p className="text-xl font-bold">₹{new Intl.NumberFormat('en-IN').format(parseFloat((localStorage.getItem("prize")) ?? "") * 7658.6)}</p>
+                        {/* <p className="text-sm font-semibold">Balance</p> */}
+                        <img src={`prize_${localStorage.getItem("prize")?.split(" ")[0]}g.png`} alt="" height={50} width={50} className='pl-2'/>
                     </div>
                     <div className="text-right">
                         <p className="text-sm font-semibold">MMTC-PAMP🪙</p>
@@ -34,11 +34,11 @@ export default function GoldLocker() {
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text-sm">Gold Balance</p>
-                        <p className="text-lg font-bold">₹0.00</p>
+                        <p className="text-lg font-bold">₹{new Intl.NumberFormat('en-IN').format(parseFloat((localStorage.getItem("prize")) ?? "") * 7658.6)}</p>
                     </div>
                     <div className="text-right">
                         <p className="text-sm font-semibold">Gold Weight</p>
-                        <p className="text-lg font-bold">0.00 g</p>
+                        <p className="text-lg font-bold">{new Intl.NumberFormat('en-IN').format(parseFloat((localStorage.getItem("prize")) ?? ""))} g</p>
                     </div>
                 </div>
             </div>

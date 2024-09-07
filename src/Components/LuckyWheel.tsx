@@ -154,8 +154,8 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
 
         )}
         {/* Audio elements */}
-        <audio ref={spinSound} src="../../spin.mp3" preload="auto" />
-        <audio ref={winSound} src="../../public/win.mp3" preload="auto" />
+        <audio ref={spinSound} src="/spin.mp3" preload="auto" />
+        <audio ref={winSound} src="/win.mp3" preload="auto" />
       </div>
     );
   }

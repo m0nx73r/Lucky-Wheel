@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faHeart, faSearch, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { SetStateAction, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
 const images = [
     `/product/${localStorage.getItem("prize")}gm-a.jpg`,
@@ -15,6 +16,25 @@ export default function Product() {
     const goToSlide = (index: SetStateAction<number>) => {
         setCurrentIndex(index);
     };
+
+    const goToPrevious = () => {
+        const isFirstSlide = currentIndex === 0;
+        const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
+        setCurrentIndex(newIndex);
+    };
+
+    const goToNext = () => {
+        const isLastSlide = currentIndex === images.length - 1;
+        const newIndex = isLastSlide ? 0 : currentIndex + 1;
+        setCurrentIndex(newIndex);
+    };
+
+    const handlers = useSwipeable({
+        onSwipedLeft: () => goToNext(),
+        onSwipedRight: () => goToPrevious(),
+        swipeDuration: 500,
+        trackMouse: true
+    });
 
     const [isDeliveryAvailable, setIsDeliveryAvailable] = useState(false);
     const [isDeliveryNotAvailable, setIsDeliveryNotAvailable] = useState(false);
@@ -51,7 +71,7 @@ export default function Product() {
 
                 <div className="relative w-full max-w-4xl mx-auto my-10">
                     {/* Carousel Container */}
-                    <div className="relative overflow-hidden rounded-lg">
+                    <div className="relative overflow-hidden rounded-lg" {...handlers}>
                         {/* Slides */}
                         <div
                             className="flex transition-transform duration-500 ease-in-out"
@@ -75,6 +95,7 @@ export default function Product() {
                             ))}
                         </div>
                     </div>
+
                 </div>
 
                 <div className='mb-2'>
