@@ -39,7 +39,7 @@ export default function Cart() {
             <div className="min-h-1 bg-gray-200 mb-4">
             </div>
 
-            <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+            <div className="rounded-lg bg-card text-card-foreground shadow-sm">
                 <div className="m-4 px-4 mt-4">
                     <div className="flex items-start space-x-4">
                         <img
@@ -50,8 +50,8 @@ export default function Cart() {
                             className="rounded-md pt-8 mr-2"
                         />
                         <div className="flex-1">
-                            <h3 className="font-bold text-sm">10g Lotus Rect Bar Making Charges</h3>
-                            <p className="text-xs text-muted-foreground">10g Lotus Rect Bar Making Charges</p>
+                            <h3 className="font-bold text-sm">{localStorage.getItem("prize")}g Lotus Rect Bar Making Charges</h3>
+                            <p className="text-xs text-muted-foreground">{localStorage.getItem("prize")}g Lotus Rect Bar Making Charges</p>
                             <p className="text-xl mt-2 "><span className="line-through pr-2">₹{parseInt(localStorage.getItem("prize") ?? "")  * 7658.6}</span><span className="font-bold">₹0</span></p>
                             <div className="flex items-center text-sm text-muted-foreground mt-2">
                                 <FontAwesomeIcon icon={faTruck} className="mr-2" />
