@@ -32,7 +32,7 @@ export default function GoldLocker() {
             <div className="ml-2 font-bold text-blue-500">Help</div>
         </header>
         <div className="p-2">
-            <div className="rounded-t-lg bg-white p-4 shadow mb-4">
+            <div className="rounded-t-lg bg-white p-4 shadow">
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text font-semibold">Product</p>
