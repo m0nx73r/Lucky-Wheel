@@ -65,8 +65,8 @@ export default function Cart() {
                             className="rounded-md pt-4 mx-2"
                         />
                         <div className="flex-1">
-                            <h3 className="font-bold text-sm">{getProductName()} Making Charges</h3>
-                            <p className="text-xs text-muted-foreground">{getProductName()} Making Charges</p>
+                            <h3 className="font-bold text-sm">{getProductName()}</h3>
+                            <p className="text-xs text-muted-foreground">{getProductName()}</p>
                             <p className="text-xl mt-2 "><span className="line-through pr-2">₹{parseInt(localStorage.getItem("prize") ?? "")  * 7658.6}</span><span className="font-bold">₹0</span></p>
                             <div className="flex items-center text-sm text-muted-foreground mt-2">
                                 <FontAwesomeIcon icon={faTruck} className="mr-2" />

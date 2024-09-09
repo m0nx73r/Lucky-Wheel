@@ -5,11 +5,11 @@ function getProductName(){
     const productWeight = localStorage.getItem("prize")?.split(" ")[0];
     console.log(productWeight);
     if(productWeight == "5"){
-      return "BANGALORE REFINERY";
+      return "Bangalore Refinery 5g Gold Bar";
     }else if(productWeight == "10"){
-      return "KUNDAN";
+      return "Kundan 10g Gold Bar";
     }else if(productWeight == "2"){
-      return "MMTC-PAMP";
+      return "MMTC-PAMP 2g Gold Bar";
     }else{
       return "Gold Bar";
     }
@@ -35,12 +35,12 @@ export default function GoldLocker() {
             <div className="rounded-t-lg bg-white p-4 shadow mb-4">
                 <div className="flex items-center justify-between">
                     <div>
-                        {/* <p className="text-sm font-semibold">Balance</p> */}
+                        <p className="text font-semibold">Product</p>
                         <img src={`prize_${localStorage.getItem("prize")?.split(" ")[0]}g.png`} alt="" height={50} width={50} className='pl-2'/>
                     </div>
                     <div className="text-right">
-                        <p className="text-sm font-semibold">{getProductName()}🪙</p>
-                        <p className="text-lg font-bold text-green-600">+117.33% (₹1.10)</p>
+                        <p className="text font-semibold pb-0.5 top-4">{getProductName()}</p>
+                        <p className="text-lg font-bold text-green-600 py-2.5">+{new Intl.NumberFormat('en-IN').format(parseFloat((localStorage.getItem("prize")) ?? "") * 7658.6)}% (₹{new Intl.NumberFormat('en-IN').format(parseFloat((localStorage.getItem("prize")) ?? "") * 7658.6)})</p>
                     </div>
                 </div>
             </div>
