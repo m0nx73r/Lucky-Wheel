@@ -1,5 +1,20 @@
 import firstPageAsset from '/first-page-asset.jpg';
 
+
+function getProductName(){
+    const productWeight = localStorage.getItem("prize")?.split(" ")[0];
+    console.log(productWeight);
+    if(productWeight == "5"){
+      return "BANGALORE REFINERY";
+    }else if(productWeight == "10"){
+      return "KUNDAN";
+    }else if(productWeight == "2"){
+      return "MMTC-PAMP";
+    }else{
+      return "Gold Bar";
+    }
+  }
+
 export default function GoldLocker() {
     return (
 <div className="flex flex-col min-h-screen bg-gradient-to-b from-[#dbf6ff] to-white p-4">
@@ -24,7 +39,7 @@ export default function GoldLocker() {
                         <img src={`prize_${localStorage.getItem("prize")?.split(" ")[0]}g.png`} alt="" height={50} width={50} className='pl-2'/>
                     </div>
                     <div className="text-right">
-                        <p className="text-sm font-semibold">MMTC-PAMP🪙</p>
+                        <p className="text-sm font-semibold">{getProductName()}🪙</p>
                         <p className="text-lg font-bold text-green-600">+117.33% (₹1.10)</p>
                     </div>
                 </div>

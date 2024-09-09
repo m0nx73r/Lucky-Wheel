@@ -142,13 +142,13 @@ const WheelComponent: FC<WheelComponentProps> = memo(
       const segmentAngle = (Math.PI * 2) / segments.length;
       return (3 * Math.PI) / 2 - (winningIndex * segmentAngle) - (segmentAngle / 2);
     }
+
     const onTimerTick = () => {
       frames++;
       draw();
       const totalDuration = upTime + downTime;
       const duration = new Date().getTime() - spinStart;
       let finished = false;
-      
     
       if (duration < totalDuration) {
         if (duration < upTime) {
@@ -163,7 +163,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
           if (winningSegment && targetAngle !== null) {
             // Ensure minimum rotations
             const minimumAngle = minSpinRotations * Math.PI * 2;
-          
+    
             if (totalSpinAngle < minimumAngle) {
               // Continue spinning at max speed until minimum rotations are reached
               angleDelta = maxSpeed;
@@ -173,14 +173,13 @@ const WheelComponent: FC<WheelComponentProps> = memo(
               if (angleDifference < 0) angleDifference += Math.PI * 2;
               if (angleDifference > Math.PI) angleDifference -= Math.PI * 2;
     
-              // Decelerate towards the target angle
-              // Use a custom easing function for smoother deceleration
-              const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-              angleDelta = angleDifference * easeOutCubic(decelerationProgress) * 0.1;
+              // Use an ease-out exponential function for smoother deceleration
+              const easeOutExpo = (t: number) => 1 - Math.pow(2, -10 * t);
+              angleDelta = angleDifference * easeOutExpo(decelerationProgress) * 0.1;
     
               // Gradually reduce speed as we approach the target
               if (Math.abs(angleDifference) < 0.1 && decelerationProgress > 0.8) {
-                angleDelta *= 0.5; // Slow down further when close
+                angleDelta *= 0.3; // Slow down significantly when very close
               }
     
               // Check if we're close enough to stop
@@ -209,6 +208,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         angleDelta = 0;
       }
     };
+    
 
 
     // Draw the entire wheel and needle

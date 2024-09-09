@@ -10,6 +10,21 @@ const images = [
     `/product/${localStorage.getItem("prize")}gm-d.jpg`,
 ];
 
+function getProductName(){
+    const productWeight = localStorage.getItem("prize")?.split(" ")[0];
+    console.log(productWeight);
+    if(productWeight == "5"){
+      return "Bangalore Refinery 5g Gold Bar 24kt";
+    }else if(productWeight == "10"){
+      return "Kundan 10g Gold Bar 24kt";
+    }else if(productWeight == "2"){
+      return "MMTC-PAMP 2g Gold Bar 24kt";
+    }else{
+      return "Gold Bar";
+    }
+  }
+
+
 export default function Product() {
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -99,8 +114,8 @@ export default function Product() {
                 </div>
 
                 <div className='mb-2'>
-                    <p className='text-sm'>
-                        1 gm Gold 999.9 Minted Bar Lotus Certified QR
+                    <p className='text-sm font-semibold'>
+                        {getProductName()}
                     </p>
                 </div>
 

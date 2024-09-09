@@ -6,6 +6,20 @@ import { Minus, Plus } from "lucide-react";
 
 const goldBarImg = `prize_${localStorage.getItem("prize")?.split(" ")[0]}g.png`
 
+function getProductName(){
+    const productWeight = localStorage.getItem("prize")?.split(" ")[0];
+    console.log(productWeight);
+    if(productWeight == "5"){
+      return "Bangalore Refinery 5g Gold Bar 24kt";
+    }else if(productWeight == "10"){
+      return "Kundan 10g Gold Bar 24kt";
+    }else if(productWeight == "2"){
+      return "MMTC-PAMP 2g Gold Bar 24kt";
+    }else{
+      return "Gold Bar";
+    }
+  }
+
 export default function Cart() {
     return (
         <div className="flex flex-col min-h-screen pt-4">
@@ -51,8 +65,8 @@ export default function Cart() {
                             className="rounded-md pt-4 mx-2"
                         />
                         <div className="flex-1">
-                            <h3 className="font-bold text-sm">{localStorage.getItem("prize")}g Lotus Rect Bar Making Charges</h3>
-                            <p className="text-xs text-muted-foreground">{localStorage.getItem("prize")}g Lotus Rect Bar Making Charges</p>
+                            <h3 className="font-bold text-sm">{getProductName()} Making Charges</h3>
+                            <p className="text-xs text-muted-foreground">{getProductName()} Making Charges</p>
                             <p className="text-xl mt-2 "><span className="line-through pr-2">₹{parseInt(localStorage.getItem("prize") ?? "")  * 7658.6}</span><span className="font-bold">₹0</span></p>
                             <div className="flex items-center text-sm text-muted-foreground mt-2">
                                 <FontAwesomeIcon icon={faTruck} className="mr-2" />
